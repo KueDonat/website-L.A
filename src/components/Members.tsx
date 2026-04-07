@@ -91,7 +91,7 @@ const MEMBER_DETAILS: Record<
     banner:
       "https://i.pinimg.com/1200x/a6/14/e8/a614e84673c5d2d2954615b1f0368142.jpg",
     quote: '"a girl who just like hirono."',
-    roles: ["Designer"],
+    roles: ["Designer", "Soundman", "Event Organizer"],
     socials: [
       {
         platform: "Instagram",
