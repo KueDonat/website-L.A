@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
 import { motion, AnimatePresence } from "framer-motion";
 import CollaborationModal from "./CollaborationModal";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [flash, setFlash] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function Navbar() {
     if (!isMounted || !lenis) return;
 
     setFlash(true);
+    setIsMobileMenuOpen(false); // Tutup menu saat diklik
     setTimeout(() => setFlash(false), 600);
 
     if (id === "home") {
@@ -86,7 +89,48 @@ export default function Navbar() {
               COLLABORATE
             </button>
           </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            className="md:hidden text-white hover:text-blue-500 transition-colors p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-full left-0 w-full bg-[#050505]/95 backdrop-blur-2xl border-b border-white/5 md:hidden overflow-hidden shadow-2xl"
+            >
+              <div className="flex flex-col px-10 py-8 space-y-6">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.name}
+                    onClick={(e) => handleScrollTo(e, link.id)}
+                    className="text-left text-[12px] font-bold tracking-[0.4em] text-white/70 hover:text-white transition-all cursor-pointer"
+                  >
+                    {link.name}
+                  </button>
+                ))}
+                <div className="pt-6 border-t border-white/10">
+                  <button 
+                    onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
+                    className="w-full px-6 py-4 border border-blue-500/50 text-[11px] tracking-[0.3em] font-bold text-blue-400 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 rounded-sm cursor-pointer text-center"
+                  >
+                    COLLABORATE
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <AnimatePresence>

@@ -56,22 +56,22 @@ export default function CollaborationModal({ isOpen, onClose }: CollaborationMod
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="w-full max-w-lg bg-[#050505]/90 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl shadow-[0_0_50px_rgba(59,130,246,0.15)] relative pointer-events-auto overflow-hidden"
+              className="w-full max-w-lg bg-[#050505]/90 backdrop-blur-2xl border border-white/10 p-6 md:p-8 rounded-3xl shadow-[0_0_50px_rgba(59,130,246,0.15)] relative pointer-events-auto overflow-hidden"
             >
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors z-20 cursor-pointer"
+                className="absolute top-5 right-5 text-gray-500 hover:text-white transition-colors z-20 cursor-pointer"
               >
-                <FaTimes size={20} />
+                <FaTimes size={18} />
               </button>
 
               {/* Header */}
-              <div className="mb-8 relative z-10">
-                <h3 className="text-2xl font-serif italic text-white mb-2 leading-tight">
+              <div className="mb-6 relative z-10">
+                <h3 className="text-xl md:text-2xl font-serif italic text-white mb-1.5 leading-tight">
                   Partner with <span className="text-blue-500 font-bold not-italic">L.A</span>
                 </h3>
-                <p className="text-gray-400 text-sm font-light leading-relaxed">
+                <p className="text-gray-400 text-xs md:text-sm font-light leading-relaxed">
                   Ceritakan ide kolaborasi eksklusifmu, dan biarkan tim ahli kami mewujudkannya.
                 </p>
               </div>
@@ -94,36 +94,36 @@ export default function CollaborationModal({ isOpen, onClose }: CollaborationMod
                   {/* FORM INPUTS */}
                   <form 
                     onSubmit={handleSubmit}
-                    className="space-y-6 relative z-10"
+                    className="space-y-4 relative z-10"
                   >
                     <div>
-                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-2 ml-1">Komunitas / Klien</label>
+                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1.5 ml-1">Komunitas / Klien</label>
                       <input 
                         type="text" 
                         name="entry.1886450165"
                         required 
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all"
                         placeholder="Contoh: Dandelion ID"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-2 ml-1">Kontak Person (Email/Discord)</label>
+                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1.5 ml-1">Kontak Person (Email/Discord)</label>
                       <input 
                         type="text" 
                         name="entry.996536454"
                         required 
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all"
                         placeholder="Tulis username atau email aktif"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-2 ml-1">Tipe Kolaborasi</label>
+                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1.5 ml-1">Tipe Kolaborasi</label>
                       <div className="relative">
                         <select 
                           name="entry.1701288874"
-                          className="w-full bg-[#111] border border-white/10 rounded-xl px-5 py-3.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 transition-all appearance-none cursor-pointer"
+                          className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-2.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 transition-all appearance-none cursor-pointer"
                         >
                           <option value="Event Organizer Penuh">Event Organizer Keseluruhan</option>
                           <option value="Sewa Talent (MC/Host)">Undang Talent (MC/Host)</option>
@@ -138,19 +138,19 @@ export default function CollaborationModal({ isOpen, onClose }: CollaborationMod
                     </div>
 
                     <div>
-                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-2 ml-1">Deskripsi Singkat</label>
+                      <label className="block text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1.5 ml-1">Deskripsi Singkat</label>
                       <textarea 
                         name="entry.1785858440"
                         required 
-                        rows={3}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all resize-none"
+                        rows={2}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-500/5 transition-all resize-none"
                         placeholder="Ceritakan rencana tanggal acara atau detail lainnya..."
                       ></textarea>
                     </div>
 
                     <button 
                       type="submit" 
-                      className="w-full mt-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black tracking-[0.2em] uppercase text-[10px] py-4 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.6)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                      className="w-full mt-1 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black tracking-[0.2em] uppercase text-[10px] py-3.5 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.6)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                     >
                       Kirim Pengajuan
                     </button>
