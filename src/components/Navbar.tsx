@@ -40,7 +40,7 @@ export default function Navbar() {
     if (id === "home") {
       lenis.scrollTo(0);
     } else {
-      const target = document.querySelector(`#${id}`);
+      const target = document.querySelector(`#${id}`) as HTMLElement;
       if (target) {
         lenis.scrollTo(target, { offset: -80 });
       }
