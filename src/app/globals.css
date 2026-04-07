@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  /* Di sini cara kita daftarin warna gold di v4 */
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #B8860B;
+  
+  /* Daftarin font juga di sini */
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+/* Base style untuk body */
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+/* Berikan jarak agar section tidak tertutup Navbar saat di-klik */
+section {
+  scroll-margin-top: 80px; /* Sesuaikan dengan tinggi Navbar kamu */
+}
+
+html {
+  scroll-behavior: smooth;
+}
