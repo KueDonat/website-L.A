@@ -61,11 +61,11 @@ const MEMBER_DETAILS: Record<
         url: "https://www.instagram.com/clealilium?igsh=MWVpbGUxcGEwOGl0aA==",
         icon: FaInstagram,
       },
-      // {
-      //   platform: "Tiktok",
-      //   url: "https://www.tiktok.com/@alexandras._tea?_r=1&_t=ZS-95J9Wr73MQu",
-      //   icon: FaTiktok,
-      // },
+      {
+        platform: "Spotify",
+        url: "https://open.spotify.com/user/31hcx3lejstgiilmd5kxs5ucftna?si=5A7wdr-ZTACBDjGC-OeTDA",
+        icon: FaSpotify,
+      },
     ],
   },
   "762016751810117712": {
