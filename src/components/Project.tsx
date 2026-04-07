@@ -23,7 +23,7 @@ const PROJECT_DATA = [
       "Sesi deep-talk interaktif eksklusif bersama puluhan member komunitas Dandelion yang membahas secara tuntas fenomena pertemanan maya.",
     audience: "40+",
     type: "Podcast",
-    imageFallback: "/projects/ONLINE TEMENAN, OFFLINE CANGGUNG(1).jpg",
+    imageFallback: "/projects/online_temenan.jpg",
   },
   {
     id: 3,

@@ -177,7 +177,7 @@ export default function NetworkParticles() {
   return (
     <canvas 
       ref={canvasRef} 
-      className="absolute inset-0 pointer-events-none z-[1] mix-blend-screen"
+      className="absolute inset-0 pointer-events-none z-1 mix-blend-screen"
     />
   );
 }

@@ -1,6 +1,4 @@
-import { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+const nextConfig = {
   // Tambahkan baris ini untuk memperbaiki masalah icon di Next.js 16
   experimental: {
     optimizePackageImports: ["lucide-react"],

@@ -19,7 +19,6 @@ export default function Home() {
   const spotlightY = useSpring(mouseY, { damping: 25, stiffness: 150 });
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     setMounted(true); // Set true setelah komponen muncul di browser
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -73,7 +72,7 @@ export default function Home() {
                 scale: [0.9, 1, 1.3, 1, 0.9]
               }}
               transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              className="absolute w-[250px] h-[250px] bg-[#D4AF37]/15 blur-[100px] rounded-full mix-blend-screen"
+              className="absolute w-[250px] h-[250px] bg-gold-500/15 blur-[100px] rounded-full mix-blend-screen"
             />
             {/* Cincin Futuristik Abstrak */}
             <motion.div 
@@ -82,7 +81,7 @@ export default function Home() {
                 scale: [1, 1.1, 1]
               }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[400px] h-[400px] border border-blue-500/10 rounded-full"
+              className="absolute w-100 h-100 border border-blue-500/10 rounded-full"
             />
             <motion.div 
               animate={{ 
@@ -90,7 +89,7 @@ export default function Home() {
                 scale: [1.1, 1, 1.1]
               }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[500px] h-[500px] border border-[#D4AF37]/5 rounded-full"
+              className="absolute w-125 h-125 border border-gold-500/5 rounded-full"
             />
           </div>
         )}

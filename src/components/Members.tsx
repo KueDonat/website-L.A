@@ -152,7 +152,7 @@ export default function Members() {
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic text-white">
               Our Core Team
             </h2>
-            <div className="h-1 w-20 bg-[#D4AF37] mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+            <div className="h-1 w-20 bg-gold-500 mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
           </div>
         </FadeIn>
 
@@ -161,7 +161,7 @@ export default function Members() {
             <FadeIn key={`${user.id}-${index}`}>
               <div
                 onClick={() => setSelectedMember(user)}
-                className="group relative bg-gradient-to-b from-zinc-900/50 to-[#0a0a0a] border border-white/10 hover:border-[#D4AF37]/50 rounded-[2rem] cursor-pointer hover:shadow-[0_15px_50px_rgba(212,175,55,0.15)] transition-all duration-500 overflow-hidden"
+                className="group relative bg-gradient-to-b from-zinc-900/50 to-[#0a0a0a] border border-white/10 hover:border-gold-500/50 rounded-[2rem] cursor-pointer hover:shadow-[0_15px_50px_rgba(212,175,55,0.15)] transition-all duration-500 overflow-hidden"
               >
                 {/* BANNER BACKGROUND */}
                 <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-500">
@@ -184,7 +184,7 @@ export default function Members() {
                 <div className="pt-16 pb-8 px-6 flex flex-col items-center relative z-10">
                   {/* AVATAR DENGAN ANIMASI ELEVATE */}
                   <div className="relative w-28 h-28 mb-5 rounded-full border-4 border-[#0a0a0a] shadow-[0_0_20px_rgba(0,0,0,0.8)] group-hover:-translate-y-2 transition-transform duration-500">
-                    <div className="absolute inset-0 rounded-full border border-[#D4AF37]/40 group-hover:border-[#D4AF37] transition-all duration-700 overflow-hidden">
+                    <div className="absolute inset-0 rounded-full border border-gold-500/40 group-hover:border-gold-500 transition-all duration-700 overflow-hidden">
                       <Image
                         src={
                           user.avatar
@@ -200,7 +200,7 @@ export default function Members() {
                   </div>
 
                   {/* NAMA GLOBAL */}
-                  <h3 className="text-2xl font-black text-white italic drop-shadow-md group-hover:text-[#D4AF37] transition-colors duration-300 text-center uppercase tracking-tight">
+                  <h3 className="text-2xl font-black text-white italic drop-shadow-md group-hover:text-gold-500 transition-colors duration-300 text-center uppercase tracking-tight">
                     {user.global_name || user.username}
                   </h3>
 
@@ -209,14 +209,14 @@ export default function Members() {
                     <p className="text-gray-400 text-xs font-medium lowercase">
                       @{user.username}
                     </p>
-                    <span className="px-3 py-1 mt-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold text-gray-300 tracking-widest uppercase group-hover:border-[#D4AF37]/30 transition-colors">
+                    <span className="px-3 py-1 mt-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold text-gray-300 tracking-widest uppercase group-hover:border-gold-500/30 transition-colors">
                       {MEMBER_DETAILS[user.id]?.roles?.[0] || "Core Team"}
                     </span>
                   </div>
 
                   {/* VIEW PROFILE BUTTON */}
                   <div className="w-full flex justify-center">
-                    <div className="flex items-center gap-2 px-6 py-2.5 rounded-xl border border-[#D4AF37]/30 bg-gradient-to-r from-[#D4AF37]/5 to-transparent text-[#D4AF37] text-[10px] tracking-[0.2em] uppercase font-black opacity-80 group-hover:opacity-100 group-hover:bg-[#D4AF37]/10 group-hover:border-[#D4AF37]/60 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-500">
+                    <div className="flex items-center gap-2 px-6 py-2.5 rounded-xl border border-gold-500/30 bg-gradient-to-r from-gold-500/5 to-transparent text-gold-500 text-[10px] tracking-[0.2em] uppercase font-black opacity-80 group-hover:opacity-100 group-hover:bg-gold-500/10 group-hover:border-gold-500/60 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-500">
                       <span>View Profile</span>
                       <svg
                         className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300"

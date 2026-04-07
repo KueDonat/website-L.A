@@ -52,7 +52,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-[999] transition-all duration-700 ${
+      <nav className={`fixed top-0 w-full z-999 transition-all duration-700 ${
         isScrolled 
           ? "bg-black/40 backdrop-blur-xl py-4 border-b border-white/5 shadow-2xl" 
           : "bg-transparent py-8"
@@ -64,7 +64,7 @@ export default function Navbar() {
             className="text-2xl font-black tracking-tighter cursor-pointer group"
           >
             <span className="text-white group-hover:text-blue-500 transition-colors uppercase">L.A </span>
-            <span className="text-[#D4AF37] uppercase">Société</span>
+            <span className="text-gold-500 uppercase">Société</span>
           </button>
 
           <div className="hidden md:flex items-center space-x-12 text-white">
@@ -75,7 +75,7 @@ export default function Navbar() {
                 className="text-[11px] font-bold tracking-[0.4em] text-white/70 hover:text-white transition-all cursor-pointer relative group/item"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 transition-all duration-300 group-hover/item:w-full"></span>
               </button>
             ))}
             
@@ -96,7 +96,7 @@ export default function Navbar() {
             animate={{ x: "100%", opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent z-[1000] pointer-events-none shadow-[0_0_15px_rgba(59,130,246,0.8)]"
+            className="fixed left-0 w-full h-px bg-linear-to-r from-transparent via-blue-500 to-transparent z-1000 pointer-events-none shadow-[0_0_15px_rgba(59,130,246,0.8)]"
             style={{ 
               top: isScrolled ? "64px" : "96px"
             }}
