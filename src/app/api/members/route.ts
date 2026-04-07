@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 const MEMBER_IDS = [
+  "763938193418354727",
   "1214815892668547105",
+  "999264557916762224",
   "762016751810117712",
   "1380038926793703495",
   "908159981168251012",
-  "763938193418354727",
-  "999264557916762224",
 ];
 
 export async function GET() {
