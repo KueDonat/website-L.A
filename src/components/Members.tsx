@@ -95,7 +95,7 @@ const MEMBER_DETAILS: Record<
     socials: [
       {
         platform: "Instagram",
-        url: "https://www.instagram.com/alexandrascharm?igsh=enBicDRlYzBkejdq&utm_source=qr",
+        url: "https://www.instagram.com/alexandrasradio?igsh=MXUyeGpjcGx4bWZtZg%3D%3D&utm_source=qr",
         icon: FaInstagram,
       },
       {
