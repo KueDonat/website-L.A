@@ -21,6 +21,24 @@ const MEMBER_DETAILS: Record<
     socials: { platform: string; url: string; icon: any }[];
   }
 > = {
+  "763938193418354727": {
+    banner:
+      "https://i.pinimg.com/1200x/1e/e4/ea/1ee4ea2b1be83256014a624d178eddd3.jpg",
+    quote: '"No bio yet"',
+    roles: ["Leader L.A", "Designer", "Soundman", "Event Organizer"],
+    socials: [
+      {
+        platform: "Instagram",
+        url: "https://www.instagram.com/narrynhh?igsh=MXN4eWw5cXhoaW55NQ==",
+        icon: FaInstagram,
+      },
+      // {
+      //   platform: "Tiktok",
+      //   url: "https://www.tiktok.com/@alexandras._tea?_r=1&_t=ZS-95J9Wr73MQu",
+      //   icon: FaTiktok,
+      // },
+    ],
+  },
   "1214815892668547105": {
     banner:
       "https://i.pinimg.com/originals/53/c8/8c/53c88c1383f3a873273b23a365006197.gif",
@@ -29,6 +47,25 @@ const MEMBER_DETAILS: Record<
     socials: [
       { platform: "Instagram", url: "#", icon: FaInstagram },
       { platform: "Tiktok", url: "#", icon: FaTiktok },
+    ],
+  },
+  "999264557916762224": {
+    banner:
+      "https://i.pinimg.com/736x/cc/c2/ad/ccc2ad580d01ec22d2b374fb283ed0a9.jpg",
+    quote:
+      '"Dios siempre está conmigo No siempre culpes a Dios y al destino, sino intenta evaluarte a ti mismo."',
+    roles: ["Manager L.A", "Event Organizer", "Host"],
+    socials: [
+      {
+        platform: "Instagram",
+        url: "https://www.instagram.com/clealilium?igsh=MWVpbGUxcGEwOGl0aA==",
+        icon: FaInstagram,
+      },
+      // {
+      //   platform: "Tiktok",
+      //   url: "https://www.tiktok.com/@alexandras._tea?_r=1&_t=ZS-95J9Wr73MQu",
+      //   icon: FaTiktok,
+      // },
     ],
   },
   "762016751810117712": {
@@ -84,43 +121,6 @@ const MEMBER_DETAILS: Record<
         url: "https://www.tiktok.com/@.aeliee",
         icon: FaTiktok,
       },
-    ],
-  },
-  "763938193418354727": {
-    banner:
-      "https://i.pinimg.com/1200x/1e/e4/ea/1ee4ea2b1be83256014a624d178eddd3.jpg",
-    quote: '"No bio yet"',
-    roles: ["Leader L.A", "Designer", "Soundman", "Event Organizer"],
-    socials: [
-      {
-        platform: "Instagram",
-        url: "https://www.instagram.com/narrynhh?igsh=MXN4eWw5cXhoaW55NQ==",
-        icon: FaInstagram,
-      },
-      // {
-      //   platform: "Tiktok",
-      //   url: "https://www.tiktok.com/@alexandras._tea?_r=1&_t=ZS-95J9Wr73MQu",
-      //   icon: FaTiktok,
-      // },
-    ],
-  },
-  "999264557916762224": {
-    banner:
-      "https://i.pinimg.com/736x/cc/c2/ad/ccc2ad580d01ec22d2b374fb283ed0a9.jpg",
-    quote:
-      '"Dios siempre está conmigo No siempre culpes a Dios y al destino, sino intenta evaluarte a ti mismo."',
-    roles: ["Manager L.A", "Event Organizer", "Host"],
-    socials: [
-      {
-        platform: "Instagram",
-        url: "https://www.instagram.com/clealilium?igsh=MWVpbGUxcGEwOGl0aA==",
-        icon: FaInstagram,
-      },
-      // {
-      //   platform: "Tiktok",
-      //   url: "https://www.tiktok.com/@alexandras._tea?_r=1&_t=ZS-95J9Wr73MQu",
-      //   icon: FaTiktok,
-      // },
     ],
   },
 };
