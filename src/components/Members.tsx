@@ -23,7 +23,7 @@ const MEMBER_DETAILS: Record<
 > = {
   "763938193418354727": {
     banner:
-      "https://i.pinimg.com/1200x/1e/e4/ea/1ee4ea2b1be83256014a624d178eddd3.jpg",
+      "https://wsrv.nl/?url=i.pinimg.com/1200x/1e/e4/ea/1ee4ea2b1be83256014a624d178eddd3.jpg",
     quote: '"No bio yet"',
     roles: ["Leader L.A", "Designer", "Soundman", "Event Organizer"],
     socials: [
@@ -41,7 +41,7 @@ const MEMBER_DETAILS: Record<
   },
   "1214815892668547105": {
     banner:
-      "https://i.pinimg.com/originals/53/c8/8c/53c88c1383f3a873273b23a365006197.gif",
+      "https://wsrv.nl/?url=i.pinimg.com/originals/53/c8/8c/53c88c1383f3a873273b23a365006197.gif&n=-1",
     quote: '"Cuma manusia yang mencoba di manusiakan"',
     roles: ["CO Leader L.A", "Event Organizer", "Host", "Talent", "Soundman"],
     socials: [
@@ -51,7 +51,7 @@ const MEMBER_DETAILS: Record<
   },
   "999264557916762224": {
     banner:
-      "https://i.pinimg.com/736x/cc/c2/ad/ccc2ad580d01ec22d2b374fb283ed0a9.jpg",
+      "https://wsrv.nl/?url=i.pinimg.com/736x/cc/c2/ad/ccc2ad580d01ec22d2b374fb283ed0a9.jpg",
     quote:
       '"Dios siempre está conmigo No siempre culpes a Dios y al destino, sino intenta evaluarte a ti mismo."',
     roles: ["Manager L.A", "Event Organizer", "Host"],
@@ -89,7 +89,7 @@ const MEMBER_DETAILS: Record<
   },
   "1380038926793703495": {
     banner:
-      "https://i.pinimg.com/originals/c9/e0/9a/c9e09aed17cef8abb78364a6f19db7ff.gif",
+      "https://wsrv.nl/?url=i.pinimg.com/originals/c9/e0/9a/c9e09aed17cef8abb78364a6f19db7ff.gif&n=-1",
     quote: '"a girl who just like hirono."',
     roles: ["Designer", "Soundman", "Event Organizer"],
     socials: [
@@ -107,7 +107,7 @@ const MEMBER_DETAILS: Record<
   },
   "908159981168251012": {
     banner:
-      "https://i.pinimg.com/736x/ff/cc/aa/ffccaa15454b09ebc3a40c3be2786fa0.jpg",
+      "https://wsrv.nl/?url=i.pinimg.com/736x/ff/cc/aa/ffccaa15454b09ebc3a40c3be2786fa0.jpg",
     quote: '"Im never following my heart ever again, that organ is f dumb."',
     roles: ["Host", "Talent", "Event Organizer"],
     socials: [
