@@ -12,7 +12,7 @@ import {
 import FadeIn from "./FadeIn";
 
 // 1. DATA DETAIL MEMBER
-const MEMBER_DETAILS: Record<
+export const MEMBER_DETAILS: Record<
   string,
   {
     banner: string;

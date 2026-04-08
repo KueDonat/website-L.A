@@ -7,12 +7,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <LoadingScreen />
-        <SmoothScroll>
-          <Navbar />
-          <ClickEffect /> {/* Panggil di sini */}
-          <main>{children}</main>
-        </SmoothScroll>
+        <LoadingScreen>
+          <SmoothScroll>
+            <Navbar />
+            <ClickEffect /> {/* Panggil di sini */}
+            <main>{children}</main>
+          </SmoothScroll>
+        </LoadingScreen>
       </body>
     </html>
   );

@@ -2,17 +2,53 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MEMBER_DETAILS } from "./Members";
 
-export default function LoadingScreen() {
+export default function LoadingScreen({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Tunggu sampai seluruh document (gambar, fonts, dll) selesai di-load
-    const handleLoad = () => {
-      // Tambahkan sedikit delay agar efek terasa dan mencegah flicker jika load terlalu cepat
-      setTimeout(() => {
+    // Preload Content Logic
+    const handleLoad = async () => {
+      try {
+        // Fetch data members
+        const res = await fetch("/api/members");
+        if (!res.ok) throw new Error("Failed to load members");
+        const membersData: { id: string; avatar: string }[] = await res.json();
+
+        // Kumpulkan semua URL gambar yang perlu di-preload (Avatar & Banner)
+        const imageUrls: string[] = [];
+        membersData.forEach((user) => {
+          if (user.avatar) {
+            imageUrls.push(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
+          }
+          if (MEMBER_DETAILS[user.id]?.banner) {
+            imageUrls.push(MEMBER_DETAILS[user.id].banner);
+          }
+        });
+
+        // Preload semua gambar
+        await Promise.all(
+          imageUrls.map(
+            (url) =>
+              new Promise((resolve) => {
+                const img = new Image();
+                img.onload = resolve;
+                img.onerror = resolve; // tetep resolve meskipun gagal
+                img.src = url;
+              })
+          )
+        );
+
+        // Sedikit delay smooth setelah gambar selesai di cache browser
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 800);
+      } catch (err) {
+        console.error(err);
         setIsLoading(false);
-      }, 800);
+      }
     };
 
     if (document.readyState === "complete") {
@@ -36,10 +72,11 @@ export default function LoadingScreen() {
   }, [isLoading]);
 
   return (
-    <AnimatePresence>
-      {isLoading && (
-        <motion.div
-          key="loading"
+    <>
+      <AnimatePresence onExitComplete={() => setShowContent(true)}>
+        {isLoading && (
+          <motion.div
+            key="loading"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -94,5 +131,7 @@ export default function LoadingScreen() {
         </motion.div>
       )}
     </AnimatePresence>
+      {showContent && <div className="animate-in fade-in duration-500">{children}</div>}
+    </>
   );
 }
