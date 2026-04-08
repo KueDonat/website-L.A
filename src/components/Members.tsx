@@ -89,7 +89,7 @@ const MEMBER_DETAILS: Record<
   },
   "1380038926793703495": {
     banner:
-      "https://i.pinimg.com/1200x/a6/14/e8/a614e84673c5d2d2954615b1f0368142.jpg",
+      "https://i.pinimg.com/originals/c9/e0/9a/c9e09aed17cef8abb78364a6f19db7ff.gif",
     quote: '"a girl who just like hirono."',
     roles: ["Designer", "Soundman", "Event Organizer"],
     socials: [
