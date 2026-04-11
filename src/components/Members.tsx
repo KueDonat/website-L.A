@@ -212,7 +212,7 @@ export default function Members() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 pb-20 md:pb-6 overflow-y-auto"
+            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-sm"
           >
             {/* BACKDROP */}
             <motion.div
@@ -220,17 +220,17 @@ export default function Members() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="fixed inset-0 bg-black/95 backdrop-blur-md cursor-pointer"
+              className="fixed inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
             >
               {bgParticles.map((particle, i) => (
                 <motion.div
                   key={i}
-                  className="absolute pointer-events-none opacity-10"
+                  className="absolute pointer-events-none opacity-5 md:opacity-10"
                   style={{ left: particle.left, top: particle.top }}
                   animate={{ y: [0, -60, 0], rotate: [0, 90, 180] }}
                   transition={{ duration: particle.duration, repeat: Infinity }}
                 >
-                  <div className="w-16 h-24 border border-white/10 rounded-md bg-zinc-900 shadow-2xl"></div>
+                  <div className="w-12 h-20 md:w-16 md:h-24 border border-white/10 rounded-md bg-zinc-900 shadow-2xl"></div>
                 </motion.div>
               ))}
             </motion.div>
@@ -241,25 +241,26 @@ export default function Members() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 30, stiffness: 200 }}
-              className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 z-10 pointer-events-none"
+              className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 z-10 pointer-events-none py-10"
             >
               {/* THE CARD */}
-              <div className="relative group perspective-[1200px] pointer-events-auto shrink-0" onClick={(e) => e.stopPropagation()}>
+              <div className="relative group perspective-[1200px] pointer-events-auto shrink-0 mb-4 md:mb-0" onClick={(e) => e.stopPropagation()}>
                 <motion.div
                   animate={{
                     rotateY: [-3, 3, -3],
                     rotateX: [1, -1, 1],
-                    y: [0, -15, 0] // RESTORED FLOATING ANIMATION
+                    y: [0, -15, 0]
                   }}
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-[280px] h-[400px] sm:w-[320px] sm:h-[460px] rounded-[1.8rem] bg-[#fdfaf0] shadow-[0_40px_80px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(188,174,131,0.15)] p-5 flex flex-col border border-[#d4af37]/10"
+                  className="relative w-[240px] h-[340px] sm:w-[320px] sm:h-[460px] rounded-[1.8rem] bg-[#fdfaf0] shadow-[0_40px_80px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(188,174,131,0.15)] p-4 sm:p-5 flex flex-col border border-[#d4af37]/10"
                 >
                   <div className="absolute inset-0 opacity-[0.05] pointer-events-none rounded-[1.8rem] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
-                  <div className="absolute inset-4 border border-[#900000]/20 rounded-[1.5rem] pointer-events-none"></div>
-                  <div className="absolute inset-5 border-[2px] border-[#1a1110] rounded-[1.2rem] pointer-events-none"></div>
+                  <div className="absolute inset-3 sm:inset-4 border border-[#900000]/20 rounded-[1.5rem] pointer-events-none"></div>
+                  <div className="absolute inset-4 sm:inset-5 border-[2px] border-[#1a1110] rounded-[1.2rem] pointer-events-none"></div>
 
-                  <div className="absolute top-8 left-8 flex flex-col items-center text-[#900000] z-20">
-                    <span className="text-3xl font-black font-serif leading-none uppercase">
+                  {/* RANK TOP LEFT */}
+                  <div className="absolute top-6 left-6 sm:top-8 sm:left-8 flex flex-col items-center text-[#900000] z-20 scale-90 sm:scale-100">
+                    <span className="text-2xl sm:text-3xl font-black font-serif leading-none uppercase">
                       {(() => {
                         const roles = MEMBER_DETAILS[selectedMember.id]?.roles || [];
                         if (roles.some(r => r.includes("Leader"))) return "A";
@@ -268,11 +269,12 @@ export default function Members() {
                         return "J";
                       })()}
                     </span>
-                    <span className="text-2xl mt-0.5">♦</span>
+                    <span className="text-xl sm:text-2xl mt-0.5">♦</span>
                   </div>
 
-                  <div className="absolute bottom-8 right-8 flex flex-col items-center text-[#900000] rotate-180 z-20">
-                    <span className="text-3xl font-black font-serif leading-none uppercase">
+                  {/* RANK BOTTOM RIGHT */}
+                  <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 flex flex-col items-center text-[#900000] rotate-180 z-20 scale-90 sm:scale-100">
+                    <span className="text-2xl sm:text-3xl font-black font-serif leading-none uppercase">
                       {(() => {
                         const roles = MEMBER_DETAILS[selectedMember.id]?.roles || [];
                         if (roles.some(r => r.includes("Leader"))) return "A";
@@ -281,10 +283,10 @@ export default function Members() {
                         return "J";
                       })()}
                     </span>
-                    <span className="text-2xl mt-0.5">♦</span>
+                    <span className="text-xl sm:text-2xl mt-0.5">♦</span>
                   </div>
 
-                  <div className="absolute top-[4.5rem] bottom-[4.5rem] left-10 right-10 border-[3px] border-[#1a1110] overflow-hidden bg-[#050505]">
+                  <div className="absolute top-[3.5rem] bottom-[3.5rem] sm:top-[4.5rem] sm:bottom-[4.5rem] left-8 sm:left-10 right-8 sm:right-10 border-[3px] border-[#1a1110] overflow-hidden bg-[#050505]">
                     <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='%23600'/%3E%3C/svg%3E")`, backgroundSize: "30px 30px" }}></div>
                     <div className="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent z-10"></div>
                     <div className="absolute inset-0 flex items-end justify-center pt-6">
@@ -301,41 +303,41 @@ export default function Members() {
               </div>
 
               {/* INFORMATION SIDE */}
-              <div className="flex flex-col text-center md:text-left pointer-events-auto z-20 max-w-xl w-full">
+              <div className="flex flex-col text-center md:text-left pointer-events-auto z-20 max-w-xl w-full px-4">
                 <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-                  <div className="mb-8">
-                    <h2 className="text-5xl sm:text-6xl md:text-7xl font-serif font-black text-transparent bg-clip-text bg-linear-to-b from-white via-[#f0e6d2] to-[#bcae83] uppercase leading-tight drop-shadow-2xl">
+                  <div className="mb-6 md:mb-8">
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-black text-transparent bg-clip-text bg-linear-to-b from-white via-[#f0e6d2] to-[#bcae83] uppercase leading-tight drop-shadow-2xl">
                       {selectedMember.global_name || selectedMember.username}
                     </h2>
-                    <p className="text-[#900000] font-sans font-bold tracking-[0.3em] uppercase text-sm mt-1 flex items-center justify-center md:justify-start gap-2">
+                    <p className="text-[#900000] font-sans font-bold tracking-[0.3em] uppercase text-xs sm:text-sm mt-1 flex items-center justify-center md:justify-start gap-2">
                       <span className="w-8 h-px bg-[#900000]/40"></span>
                       @{selectedMember.username}
                     </p>
                   </div>
 
-                  <div className="mb-10">
+                  <div className="mb-8 md:mb-10">
                     <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                       {(MEMBER_DETAILS[selectedMember.id]?.roles || ["Member"]).map((role, i) => (
-                        <span key={i} className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] shadow-lg border backdrop-blur-md transition-all ${i === 0 ? "bg-[#900000]/20 border-[#900000]/40 text-[#fdfaf0] scale-110 mr-2" : "bg-white/5 border-white/10 text-gray-400"}`}>
+                        <span key={i} className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] shadow-lg border backdrop-blur-md transition-all ${i === 0 ? "bg-[#900000]/20 border-[#900000]/40 text-[#fdfaf0] scale-105 sm:scale-110 mr-1 sm:mr-2" : "bg-white/5 border-white/10 text-gray-400"}`}>
                           {role}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mb-10 relative group">
-                    <div className="p-6 bg-[#0a0a0a]/60 border-l-[3px] border-[#d4af37] rounded-r-2xl shadow-xl backdrop-blur-sm">
-                      <p className="text-gray-300 italic font-serif text-lg leading-relaxed">
+                  <div className="mb-8 md:mb-10 relative group">
+                    <div className="p-4 sm:p-6 bg-[#0a0a0a]/60 border-l-[3px] border-[#d4af37] rounded-r-2xl shadow-xl backdrop-blur-sm">
+                      <p className="text-gray-300 italic font-serif text-base sm:text-lg leading-relaxed">
                         {MEMBER_DETAILS[selectedMember.id]?.quote || "The silent strategist of Los Angeles."}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                     {(MEMBER_DETAILS[selectedMember.id]?.socials || []).map((social, i) => (
-                      <a key={i} href={social.url} target="_blank" rel="noreferrer" className="group flex items-center gap-3 px-6 py-3 border border-white/10 rounded-xl bg-white/5 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/40 hover:shadow-[0_0_30px_rgba(212,175,55,0.1)] transition-all">
-                        <social.icon size={18} className="text-[#d4af37] group-hover:scale-110 transition-transform" />
-                        <span className="text-[10px] font-bold tracking-widest uppercase text-white/70 group-hover:text-white">
+                      <a key={i} href={social.url} target="_blank" rel="noreferrer" className="group flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-6 sm:py-3 border border-white/10 rounded-xl bg-white/5 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/40 transition-all font-sans">
+                        <social.icon size={16} className="text-[#d4af37] group-hover:scale-110 transition-transform" />
+                        <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-white/70 group-hover:text-white">
                           {social.platform}
                         </span>
                       </a>
@@ -345,13 +347,14 @@ export default function Members() {
               </div>
 
               {/* CLOSE BUTTON */}
-              <button onClick={() => setSelectedMember(null)} className="fixed top-6 right-6 lg:top-10 lg:right-10 text-white/30 hover:text-white bg-white/5 hover:bg-white/10 p-4 rounded-full border border-white/10 hover:border-white/30 transition-all z-9999 group shadow-2xl pointer-events-auto">
-                <FaTimes size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+              <button onClick={() => setSelectedMember(null)} className="fixed top-4 right-4 sm:top-6 sm:right-6 lg:top-10 lg:right-10 text-white/30 hover:text-white bg-black/40 sm:bg-white/5 hover:bg-white/10 p-3 sm:p-4 rounded-full border border-white/10 hover:border-white/30 transition-all z-[10000] group shadow-2xl pointer-events-auto">
+                <FaTimes size={18} className="group-hover:rotate-90 transition-transform duration-300" />
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
 
     </section>
   );
