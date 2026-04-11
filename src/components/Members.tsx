@@ -243,125 +243,163 @@ export default function Members() {
 
       <AnimatePresence>
         {selectedMember && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-6">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 pb-20 md:pb-6 overflow-y-auto">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="absolute inset-0 bg-black/70 backdrop-blur-xl overflow-hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-md"
             >
-              {/* EFEK PARTIKEL BINTANG/SNOW (NO PLUGIN NATIVE FRAMER) */}
-              {[...Array(30)].map((_, i) => (
+              {[...Array(20)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute rounded-full bg-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+                  className={`absolute rounded-sm ${i % 2 === 0 ? "bg-red-600" : "bg-white"} opacity-10`}
                   style={{
-                    width: Math.random() * 3 + 1 + "px",
-                    height: Math.random() * 3 + 1 + "px",
+                    width: Math.random() * 10 + 5 + "px",
+                    height: Math.random() * 10 + 5 + "px",
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
                   }}
                   animate={{
-                    y: [0, Math.random() * -200 - 100],
+                    y: [0, Math.random() * -300 - 100],
                     x: [0, (Math.random() - 0.5) * 100],
-                    opacity: [0, Math.random() * 0.5 + 0.3, 0],
+                    rotate: [0, Math.random() * 360],
+                    opacity: [0, Math.random() * 0.3, 0],
                   }}
                   transition={{
-                    duration: Math.random() * 4 + 4,
+                    duration: Math.random() * 5 + 5,
                     repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: Math.random() * 2,
+                    ease: "linear",
                   }}
                 />
               ))}
             </motion.div>
 
             <motion.div
-              initial={{ scale: 0.8, opacity: 0, rotateY: 20 }}
-              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-              exit={{ scale: 0.8, opacity: 0, rotateY: -20 }}
-              transition={{ type: "spring", bounce: 0.4 }}
-              className="relative w-full max-w-[360px] bg-[#0a0a0a]/80 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] backdrop-blur-3xl z-10 group"
+              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 30 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 z-10 pointer-events-none mt-10 md:mt-0"
             >
-              {/* INNER GLOW */}
-              <div className="absolute inset-0 pointer-events-none rounded-3xl bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.1)_0%,transparent_50%)]"></div>
-
-              {/* SCANLINE EFFECT */}
-              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(59,130,246,0.03),rgba(255,255,255,0.01),rgba(59,130,246,0.03))] z-[60] bg-[length:100%_2px,3px_100%] opacity-20"></div>
-
-              {/* BANNER */}
-              <div className="relative h-32 w-full overflow-hidden bg-zinc-900">
-                <img
-                  src={
-                    MEMBER_DETAILS[selectedMember.id]?.banner ||
-                    "https://images.unsplash.com/photo-1614850523296-d8c1af93d400"
-                  }
-                  alt="Banner"
-                  className="w-full h-full object-cover brightness-100 group-hover:scale-105 transition-all duration-700"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1614850523296-d8c1af93d400";
+              {/* THE CARD */}
+              <div
+                className="relative group perspective-[1000px] pointer-events-auto shrink-0 cursor-pointer"
+                onClick={() => setSelectedMember(null)}
+              >
+                <motion.div
+                  animate={{ rotateY: [-3, 3, -3], rotateX: [2, -2, 2] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
                   }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
-                <button
-                  onClick={() => setSelectedMember(null)}
-                  className="absolute top-4 right-4 text-white/50 hover:text-white transition-all z-[70] bg-black/40 border border-white/10 hover:border-white/30 backdrop-blur-md p-1.5 rounded-full"
+                  className="relative w-[280px] h-[400px] sm:w-[320px] sm:h-[460px] rounded-[1.5rem] bg-[#fdfbf7] shadow-[20px_20px_50px_rgba(0,0,0,0.7),inset_0_0_20px_rgba(0,0,0,0.05)] p-4 flex flex-col"
                 >
-                  <FaTimes size={14} />
-                </button>
+                  <div className="absolute inset-3 border-[1px] border-black/30 rounded-xl pointer-events-none"></div>
+                  <div className="absolute inset-4 border-[2px] border-black/80 rounded-lg pointer-events-none object-none flex flex-col"></div>
+
+                  <div className="absolute top-6 left-6 flex flex-col items-center text-[#900000] z-20">
+                    <span className="text-3xl font-black font-serif leading-[0.8] tracking-tighter">
+                      {selectedMember.global_name?.[0]?.toUpperCase() ||
+                        selectedMember.username?.[0]?.toUpperCase() ||
+                        "Q"}
+                    </span>
+                    <span className="text-3xl leading-[1.2]">♦</span>
+                  </div>
+                  <div className="absolute bottom-6 right-6 flex flex-col items-center text-[#900000] rotate-180 z-20">
+                    <span className="text-3xl font-black font-serif leading-[0.8] tracking-tighter">
+                      {selectedMember.global_name?.[0]?.toUpperCase() ||
+                        selectedMember.username?.[0]?.toUpperCase() ||
+                        "Q"}
+                    </span>
+                    <span className="text-3xl leading-[1.2]">♦</span>
+                  </div>
+
+                  <div className="absolute top-[4.5rem] bottom-[4.5rem] left-10 right-10 border-[2px] border-black/80 overflow-hidden bg-[#1a1a1a]">
+                    <div
+                      className="absolute inset-0 z-0"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23111'/%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z' fill='%23700'/%3E%3Cpath d='M0 -20 L20 0 L0 20 L-20 0 Z' fill='%23700'/%3E%3Cpath d='M40 -20 L60 0 L40 20 L20 0 Z' fill='%23700'/%3E%3Cpath d='M0 20 L20 40 L0 60 L-20 40 Z' fill='%23700'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40 Z' fill='%23700'/%3E%3C/svg%3E")`,
+                        backgroundSize: "30px 30px",
+                      }}
+                    ></div>
+
+                    <div className="absolute inset-0 flex items-end justify-center z-0 pt-4">
+                      <div className="relative w-full h-[110%]">
+                        <Image
+                          src={
+                            selectedMember.avatar
+                              ? `https://cdn.discordapp.com/avatars/${selectedMember.id}/${selectedMember.avatar}.png?size=512`
+                              : `https://cdn.discordapp.com/embed/avatars/0.png`
+                          }
+                          alt="Avatar"
+                          fill
+                          className="object-cover object-top drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)]"
+                          sizes="(max-width: 640px) 240px, 320px"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-[#d9cda7] mix-blend-color z-20 opacity-10 pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="absolute inset-0 pointer-events-none z-30 opacity-40 rounded-[1.5rem]"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                      mixBlendMode: "multiply",
+                    }}
+                  ></div>
+                </motion.div>
               </div>
 
-              {/* CONTENT AREA */}
-              <div className="px-6 pb-8 -mt-12 relative z-[65]">
-                {/* AVATAR DENGAN RING ANIMASI */}
-                <div className="relative w-24 h-24 mx-auto md:mx-0 flex justify-center items-center group-hover:scale-105 transition-transform duration-500">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-blue-600 via-blue-900 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"
-                  ></motion.div>
-                  <div className="absolute inset-0 rounded-full border-2 border-[#0a0a0a] bg-[#0a0a0a]"></div>
+              {/* TYPOGRAPHY */}
+              <div className="flex flex-col text-center md:text-left pointer-events-auto z-20">
+                {(() => {
+                  const nameParts = (
+                    selectedMember.global_name || selectedMember.username
+                  ).split(" ");
+                  const topName =
+                    nameParts.length > 1
+                      ? nameParts.slice(0, -1).join(" ")
+                      : nameParts[0];
+                  const bottomName =
+                    nameParts.length > 1
+                      ? nameParts[nameParts.length - 1]
+                      : "MEMBER";
 
-                  <div className="relative w-[88px] h-[88px]">
-                    <Image
-                      src={
-                        selectedMember.avatar
-                          ? `https://cdn.discordapp.com/avatars/${selectedMember.id}/${selectedMember.avatar}.png`
-                          : `https://cdn.discordapp.com/embed/avatars/0.png`
-                      }
-                      alt="Avatar"
-                      fill
-                      className="rounded-full object-cover relative z-10"
-                      sizes="88px"
-                    />
-                  </div>
-                </div>
+                  return (
+                    <motion.div
+                      initial={{ x: 50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.2, duration: 0.8 }}
+                    >
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.4em] text-[#e5dfc9] ml-1 mb-[-0.2em] uppercase font-sans">
+                        {topName}
+                      </h3>
+                      <h2 className="text-6xl sm:text-8xl md:text-[7rem] font-serif font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] via-[#f0e6d2] to-[#bcae83] uppercase drop-shadow-[0_0_20px_rgba(188,174,131,0.3)] leading-none filter drop-shadow-lg">
+                        {bottomName}
+                      </h2>
+                    </motion.div>
+                  );
+                })()}
 
-                <div className="mt-4 text-center md:text-left px-2">
-                  {/* Nama Global (Besar) */}
-                  <h3 className="text-3xl font-black tracking-tight text-white italic leading-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                    {selectedMember.global_name || selectedMember.username}
-                  </h3>
-
-                  {/* USERNAME DISCORD ASLI */}
-                  <p className="font-sans text-[13px] text-blue-400 font-medium tracking-normal mt-0.5 lowercase drop-shadow-[0_0_5px_rgba(59,130,246,0.5)]">
-                    @{selectedMember.username}
-                  </p>
-
-                  {/* QUOTE MINI */}
-                  <div className="mt-5 p-4 bg-gradient-to-b from-white/10 to-white/5 border border-white/10 rounded-xl relative overflow-hidden group/quote">
-                    <div className="absolute top-[-50%] right-[-10%] w-16 h-16 bg-blue-500/20 blur-[20px] rounded-full group-hover/quote:bg-blue-500/40 transition-all duration-500"></div>
-                    <p className="text-[12px] text-gray-300 font-light leading-relaxed italic relative z-10">
-                      {MEMBER_DETAILS[selectedMember.id]?.quote ||
-                        '"System operative active."'}
-                    </p>
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="mt-6 flex flex-col items-center md:items-start"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-[#900000] to-transparent hidden md:block"></div>
+                    <h4 className="text-sm sm:text-lg font-bold tracking-[0.3em] text-[#bcae83] uppercase font-sans">
+                      {MEMBER_DETAILS[selectedMember.id]?.roles?.[0] ||
+                        "CORE TEAM MEMBER"}
+                    </h4>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
@@ -370,14 +408,18 @@ export default function Members() {
                     ).map((role, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 border border-blue-500/30 text-blue-400 text-[8px] font-black uppercase tracking-[0.2em] rounded-md bg-gradient-to-r from-blue-500/10 to-transparent shadow-[0_0_8px_rgba(59,130,246,0.1)]"
+                        className="px-3 py-1.5 border border-[#4a0d0d] bg-[#4a0d0d]/30 text-[#e5dfc9] text-[10px] font-black uppercase tracking-[0.2em] rounded-md shadow-[0_0_10px_rgba(74,13,13,0.3)] backdrop-blur-sm"
                       >
                         {role}
                       </span>
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3 mt-6">
+                  <p className="max-w-md mt-6 text-[#9ca3af] italic font-serif text-sm sm:text-base leading-relaxed px-4 md:px-0 bg-black/20 p-4 rounded-xl border-l-2 border-[#900000]">
+                    {MEMBER_DETAILS[selectedMember.id]?.quote || '"No bio yet"'}
+                  </p>
+
+                  <div className="flex flex-wrap gap-3 mt-6 justify-center md:justify-start">
                     {(MEMBER_DETAILS[selectedMember.id]?.socials || []).map(
                       (social, i) => (
                         <a
@@ -385,21 +427,31 @@ export default function Members() {
                           href={social.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex flex-col items-center justify-center py-2.5 border border-white/10 rounded-xl hover:bg-gradient-to-b hover:from-blue-500/10 hover:to-transparent hover:border-blue-500/30 hover:text-white hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 group/social bg-black/40"
+                          className="flex items-center gap-2 px-5 py-2.5 border border-[#4a0d0d] rounded-full hover:bg-[#900000]/20 hover:border-[#900000] hover:text-[#e5dfc9] transition-all bg-black/60 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-sm group"
                         >
                           <social.icon
                             size={16}
-                            className="group-hover/social:scale-110 group-hover/social:-translate-y-0.5 transition-transform duration-300 mb-1.5 opacity-70 group-hover/social:opacity-100 text-gray-400 group-hover/social:text-blue-400"
+                            className="text-[#bcae83] group-hover:text-[#e5dfc9]"
                           />
-                          <span className="text-[8px] font-bold tracking-widest uppercase opacity-70 group-hover/social:opacity-100 text-gray-300 group-hover/social:text-blue-400">
+                          <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/70 group-hover:text-white">
                             {social.platform}
                           </span>
                         </a>
                       ),
                     )}
                   </div>
-                </div>
+                </motion.div>
               </div>
+
+              <button
+                onClick={() => setSelectedMember(null)}
+                className="fixed top-4 right-4 sm:top-6 sm:right-6 text-white/50 hover:text-white transition-all z-[9999] bg-black/40 border border-white/20 hover:border-red-500 backdrop-blur-md p-3 rounded-full pointer-events-auto group"
+              >
+                <FaTimes
+                  size={20}
+                  className="group-hover:rotate-90 transition-transform"
+                />
+              </button>
             </motion.div>
           </div>
         )}
