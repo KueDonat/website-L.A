@@ -206,15 +206,21 @@ export default function Members() {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {selectedMember && (
-          <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 pb-20 md:pb-6 overflow-y-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 pb-20 md:pb-6 overflow-y-auto"
+          >
+            {/* BACKDROP */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="fixed inset-0 bg-black/95 backdrop-blur-md"
+              className="fixed inset-0 bg-black/95 backdrop-blur-md cursor-pointer"
             >
               {bgParticles.map((particle, i) => (
                 <motion.div
@@ -229,6 +235,7 @@ export default function Members() {
               ))}
             </motion.div>
 
+            {/* CONTENT WRAPPER */}
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -236,10 +243,15 @@ export default function Members() {
               transition={{ type: "spring", damping: 30, stiffness: 200 }}
               className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 z-10 pointer-events-none"
             >
+              {/* THE CARD */}
               <div className="relative group perspective-[1200px] pointer-events-auto shrink-0" onClick={(e) => e.stopPropagation()}>
                 <motion.div
-                  animate={{ rotateY: [-3, 3, -3], rotateX: [1, -1, 1] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{
+                    rotateY: [-3, 3, -3],
+                    rotateX: [1, -1, 1],
+                    y: [0, -15, 0] // RESTORED FLOATING ANIMATION
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                   className="relative w-[280px] h-[400px] sm:w-[320px] sm:h-[460px] rounded-[1.8rem] bg-[#fdfaf0] shadow-[0_40px_80px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(188,174,131,0.15)] p-5 flex flex-col border border-[#d4af37]/10"
                 >
                   <div className="absolute inset-0 opacity-[0.05] pointer-events-none rounded-[1.8rem] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
@@ -288,6 +300,7 @@ export default function Members() {
                 </motion.div>
               </div>
 
+              {/* INFORMATION SIDE */}
               <div className="flex flex-col text-center md:text-left pointer-events-auto z-20 max-w-xl w-full">
                 <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
                   <div className="mb-8">
@@ -331,13 +344,15 @@ export default function Members() {
                 </motion.div>
               </div>
 
-              <button onClick={() => setSelectedMember(null)} className="fixed top-6 right-6 lg:top-10 lg:right-10 text-white/30 hover:text-white bg-white/5 hover:bg-white/10 p-4 rounded-full border border-white/10 hover:border-white/30 transition-all z-9999 group shadow-2xl">
+              {/* CLOSE BUTTON */}
+              <button onClick={() => setSelectedMember(null)} className="fixed top-6 right-6 lg:top-10 lg:right-10 text-white/30 hover:text-white bg-white/5 hover:bg-white/10 p-4 rounded-full border border-white/10 hover:border-white/30 transition-all z-9999 group shadow-2xl pointer-events-auto">
                 <FaTimes size={20} className="group-hover:rotate-90 transition-transform duration-300" />
               </button>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
+
     </section>
   );
 }
