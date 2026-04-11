@@ -129,10 +129,11 @@ export default function Members() {
       .then((res) => res.json())
       .then((data) => setMembers(data));
 
-    setBgParticles([...Array(12)].map(() => ({
-      left: `${(Math.random() * 80) + 10}%`, // Keep particles away from extreme edges
+    // Optimized: Fewer particles for better performance
+    setBgParticles([...Array(6)].map(() => ({
+      left: `${(Math.random() * 80) + 10}%`,
       top: `${(Math.random() * 80) + 10}%`,
-      duration: 15 + Math.random() * 10,
+      duration: 20 + Math.random() * 15, // Slower duration
     })));
   }, []);
 
@@ -165,7 +166,7 @@ export default function Members() {
             <FadeIn key={`${user.id}-${index}`}>
               <div
                 onClick={() => setSelectedMember(user)}
-                className="group relative bg-linear-to-b from-zinc-900/50 to-[#0a0a0a] border border-white/10 hover:border-gold-500/50 rounded-[2rem] cursor-pointer hover:shadow-[0_15px_50px_rgba(212,175,55,0.15)] transition-all duration-500 overflow-hidden"
+                className="group relative bg-linear-to-b from-zinc-900/50 to-[#0a0a0a] border border-white/10 hover:border-gold-500/50 rounded-[2rem] cursor-pointer hover:shadow-[0_15px_50px_rgba(212,175,55,0.15)] transition-all duration-500 overflow-hidden will-change-transform"
               >
                 {/* BANNER */}
                 <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-500">
@@ -224,7 +225,7 @@ export default function Members() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-x-hidden overflow-y-auto bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-x-hidden overflow-y-auto bg-black/40 backdrop-blur-xs"
           >
             {/* BACKDROP */}
             <motion.div
@@ -232,18 +233,18 @@ export default function Members() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="fixed inset-0 bg-black/90 backdrop-blur-md cursor-pointer overflow-hidden"
+              className="fixed inset-0 bg-black/90 cursor-pointer overflow-hidden"
             >
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {bgParticles.map((particle, i) => (
                   <motion.div
                     key={i}
-                    className="absolute opacity-5 md:opacity-10"
+                    className="absolute opacity-5"
                     style={{ left: particle.left, top: particle.top }}
-                    animate={{ y: [0, -60, 0], rotate: [0, 90, 180] }}
-                    transition={{ duration: particle.duration, repeat: Infinity }}
+                    animate={{ y: [0, -40, 0] }} // Simplified: No rotation
+                    transition={{ duration: particle.duration, repeat: Infinity, ease: "linear" }}
                   >
-                    <div className="w-12 h-20 md:w-16 md:h-24 border border-white/10 rounded-md bg-zinc-900 shadow-2xl"></div>
+                    <div className="w-12 h-20 md:w-16 md:h-24 border border-white/5 rounded-md bg-zinc-900 shadow-xl"></div>
                   </motion.div>
                 ))}
               </div>
@@ -258,14 +259,14 @@ export default function Members() {
               className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 z-10 pointer-events-none py-10"
             >
               {/* THE CARD */}
-              <div className="relative group perspective-[1200px] pointer-events-auto shrink-0 mb-4 md:mb-0" onClick={(e) => e.stopPropagation()}>
+              <div className="relative group perspective-[1200px] pointer-events-auto shrink-0 mb-4 md:mb-0 will-change-transform" onClick={(e) => e.stopPropagation()}>
                 <motion.div
                   animate={{
-                    rotateY: [-3, 3, -3],
-                    rotateX: [1, -1, 1],
-                    y: [0, -15, 0]
+                    rotateY: [-1.5, 1.5, -1.5], // Subtler tilt
+                    rotateX: [0.5, -0.5, 0.5],
+                    y: [0, -8, 0] // Subtler float
                   }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                   className="relative w-[240px] h-[340px] sm:w-[320px] sm:h-[460px] rounded-[1.8rem] bg-[#fdfaf0] shadow-[0_40px_80px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(188,174,131,0.15)] p-4 sm:p-5 flex flex-col border border-[#d4af37]/10"
                 >
                   <div className="absolute inset-0 opacity-[0.05] pointer-events-none rounded-[1.8rem] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
@@ -312,7 +313,7 @@ export default function Members() {
                       </div>
                     </div>
                   </div>
-                  <motion.div animate={{ x: ["-150%", "150%"] }} transition={{ duration: 5, repeat: Infinity, repeatDelay: 3 }} className="absolute inset-0 w-1/3 bg-white/10 -skew-x-12 blur-2xl pointer-events-none" />
+                  <motion.div animate={{ x: ["-150%", "150%"] }} transition={{ duration: 12, repeat: Infinity, repeatDelay: 5 }} className="absolute inset-0 w-1/3 bg-white/5 -skew-x-12 blur-2xl pointer-events-none" />
                 </motion.div>
               </div>
 

@@ -92,15 +92,15 @@ export default function LoadingScreen({ children }: { children: React.ReactNode 
               opacity: [0.7, 1, 0.7],
             }}
             transition={{
-              duration: 2,
+              duration: 3, // Slower for efficiency
               repeat: Infinity,
               ease: "easeInOut",
             }}
             className="relative flex items-center justify-center p-10"
           >
-            {/* Bola Glow Biru & Kuning keemasan mengikuti aksen web */}
-            <div className="absolute w-[150px] h-[150px] bg-blue-600/30 blur-[60px] rounded-full mix-blend-screen" />
-            <div className="absolute w-[100px] h-[100px] bg-yellow-600/20 blur-[50px] rounded-full mix-blend-screen" />
+            {/* Bola Glow Biru & Kuning keemasan mengikuti aksen web (Optimized) */}
+            <div className="absolute w-[120px] h-[120px] bg-blue-600/20 blur-[40px] rounded-full mix-blend-screen" />
+            <div className="absolute w-[80px] h-[80px] bg-yellow-600/10 blur-[30px] rounded-full mix-blend-screen" />
             
             <span className="relative z-10 text-white text-sm md:text-base tracking-[0.4em] uppercase font-black drop-shadow-md">
               L.A Société

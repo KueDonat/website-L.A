@@ -6,9 +6,9 @@ import FadeIn from "./FadeIn";
 export default function About() {
   return (
     <section id="about" className="py-28 px-6 md:px-12 bg-[#050505] text-white overflow-hidden relative">
-      {/* AMBIENT BACKGROUND GLOWS */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[150px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 blur-[150px] pointer-events-none"></div>
+      {/* AMBIENT BACKGROUND GLOWS (Optimized Blur) */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative">
@@ -22,14 +22,14 @@ export default function About() {
           {/* SISI KIRI: LOGO */}
           <FadeIn>
             <div className="relative group w-full flex flex-col items-center lg:items-start pl-0 lg:pl-4">
-              {/* Efek Cahaya Biru di belakang logo agar logo biru makin menyala */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 h-64 md:h-96 bg-blue-600/10 rounded-full blur-[100px] group-hover:bg-blue-600/20 transition-all duration-700 pointer-events-none"></div>
+              {/* Softened glow for efficiency */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 h-64 md:h-96 bg-blue-600/5 rounded-full blur-[80px] group-hover:bg-blue-600/10 transition-all duration-700 pointer-events-none"></div>
               
               {/* LOGO pengganti Headline dengan animasi melayang */}
               <motion.div 
                 className="relative w-full h-[300px] md:h-[450px]"
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -10, 0] }} // Subtler float
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Image 
                   src="/logo.png" 
@@ -54,8 +54,8 @@ export default function About() {
           <FadeIn>
             <div className="space-y-6">
               
-              {/* KARTU 1 (Headline & Misi) */}
-              <div className="bg-gradient-to-br from-[#0a0a0a]/90 to-[#0a0a0a]/40 backdrop-blur-2xl border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative overflow-hidden group">
+              {/* KARTU 1 (Headline & Misi) - Optimized Blur */}
+              <div className="bg-gradient-to-br from-[#0a0a0a]/90 to-[#0a0a0a]/40 backdrop-blur-md border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative overflow-hidden group will-change-transform">
                 {/* Glow pojok atas */}
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 blur-[50px] group-hover:bg-blue-500/20 transition-all duration-700 pointer-events-none"></div>
                 
@@ -68,8 +68,8 @@ export default function About() {
                 </p>
               </div>
               
-              {/* KARTU 2 (Visi & Pelaksanaan) */}
-              <div className="bg-[#0a0a0a]/40 backdrop-blur-xl border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-lg hover:bg-[#0a0a0a]/60 transition-colors duration-500">
+              {/* KARTU 2 (Visi & Pelaksanaan) - Optimized Blur */}
+              <div className="bg-[#0a0a0a]/40 backdrop-blur-md border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-lg hover:bg-[#0a0a0a]/60 transition-colors duration-500 will-change-transform">
                 <p className="text-gray-300 leading-loose text-base md:text-lg font-medium pr-0 md:pr-4">
                   Dengan pengalaman yang terus berkembang, <strong className="text-white tracking-widest font-black">L.A</strong> mampu menghadirkan konsep event yang fleksibel dan relevan, mulai dari hiburan, talkshow, hingga kolaborasi komunitas. Setiap event dirancang secara terstruktur dengan eksekusi yang rapi, memastikan pengalaman yang menarik dan berkesan bagi seluruh peserta.
                 </p>

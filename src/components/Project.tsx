@@ -40,8 +40,8 @@ const PROJECT_DATA = [
 export default function Project() {
   return (
     <section id="projects" className="py-32 bg-[#050505] text-white relative">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 right-0 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-blue-600/5 blur-[150px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/4"></div>
+      {/* Background Ambient Glow (Optimized) */}
+      <div className="absolute top-1/2 right-0 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-blue-600/5 blur-[80px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/4"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <FadeIn>
@@ -62,7 +62,7 @@ export default function Project() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {PROJECT_DATA.map((project) => (
             <FadeIn key={project.id}>
-              <div className="group bg-gradient-to-b from-[#0a0a0a]/80 to-[#050505] backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/50 hover:shadow-[0_15px_40px_rgba(59,130,246,0.15)] transition-all duration-500 cursor-pointer h-full flex flex-col relative">
+              <div className="group bg-gradient-to-b from-[#0a0a0a]/80 to-[#050505] backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/50 hover:shadow-[0_15px_40px_rgba(59,130,246,0.15)] transition-all duration-500 cursor-pointer h-full flex flex-col relative will-change-transform">
                 {/* Visual Image Wrapper */}
                 <div className="relative h-60 w-full overflow-hidden bg-[#111]">
                   <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay group-hover:bg-transparent transition-all duration-500 z-10"></div>

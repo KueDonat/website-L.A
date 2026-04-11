@@ -60,28 +60,27 @@ export default function NetworkParticles() {
       }
     }
 
+    const isMobile = width < 768;
     const particles: Particle[] = [];
-    const particleCount = 70;
+    const particleCount = isMobile ? 20 : 40; // Optimized: Lower count
     
     // Mouse interaction radius
     const mouse = {
       x: -1000,
       y: -1000,
-      radius: 200
+      radius: isMobile ? 100 : 180 // Smaller on mobile
     };
 
     function init() {
       particles.length = 0;
-      // Kombinasi Biru Brand dan Gold Aktif LA
       const colors = ["#3b82f6", "#60a5fa", "#D4AF37"]; 
 
       for (let i = 0; i < particleCount; i++) {
-        const size = (Math.random() * 2) + 1;
+        const size = (Math.random() * (isMobile ? 1.5 : 2)) + 1;
         const x = Math.random() * width;
         const y = Math.random() * height;
-        // Pelan mendayu geraknya
-        const directionX = (Math.random() * 0.6) - 0.3;
-        const directionY = (Math.random() * 0.6) - 0.3;
+        const directionX = (Math.random() * 0.4) - 0.2; // Slower
+        const directionY = (Math.random() * 0.4) - 0.2;
         const color = colors[Math.floor(Math.random() * colors.length)];
 
         particles.push(new Particle(x, y, directionX, directionY, size, color));
@@ -91,19 +90,19 @@ export default function NetworkParticles() {
     function connect() {
       if (!ctx) return;
       
-      // Connect nodes to each other and to mouse to form the DNA / Network effect
+      const maxDistance = isMobile ? 100 : 150;
+      
       for (let a = 0; a < particles.length; a++) {
         for (let b = a; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const distance = (dx * dx) + (dy * dy);
 
-          // Tarik garis antar sesama dot yang berdekatan
-          if (distance < (120 * 120)) {
-            const opacityValue = 1 - (distance / (120 * 120));
-            ctx.strokeStyle = `rgba(100, 150, 255, ${opacityValue * 0.3})`;
-            ctx.lineWidth = 0.8;
-            ctx.shadowBlur = 0;
+          if (distance < (maxDistance * maxDistance)) {
+            const opacityValue = 1 - (distance / (maxDistance * maxDistance));
+            ctx.strokeStyle = `rgba(100, 150, 255, ${opacityValue * 0.2})`;
+            ctx.lineWidth = 0.5;
+            // ctx.shadowBlur = 0; // Removed expensive shadow
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
@@ -111,18 +110,15 @@ export default function NetworkParticles() {
           }
         }
 
-        // Connect dot to MOUSE krusor
         const msDx = mouse.x - particles[a].x;
         const msDy = mouse.y - particles[a].y;
         const msDistance = (msDx * msDx) + (msDy * msDy);
         
         if (msDistance < (mouse.radius * mouse.radius)) {
           const opacityValue = 1 - (msDistance / (mouse.radius * mouse.radius));
-          // Tarikan ke mouse warnanya lebih terang seakan DNA menyambung ke kursor
-          ctx.strokeStyle = `rgba(212, 175, 55, ${opacityValue * 0.8})`; 
-          ctx.lineWidth = 1;
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = "#D4AF37";
+          ctx.strokeStyle = `rgba(212, 175, 55, ${opacityValue * 0.5})`; 
+          ctx.lineWidth = 0.8;
+          // ctx.shadowBlur = 0; // Removed expensive shadow
           ctx.beginPath();
           ctx.moveTo(particles[a].x, particles[a].y);
           ctx.lineTo(mouse.x, mouse.y);

@@ -10,8 +10,8 @@ export default function Contact() {
       id="contact"
       className="py-32 bg-[#050505] text-white relative overflow-hidden"
     >
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
+      {/* Background Ambient Glow (Optimized) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-blue-600/5 blur-[80px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <FadeIn>
@@ -95,7 +95,7 @@ export default function Contact() {
 
           {/* RIGHT: FORM */}
           <FadeIn>
-            <div className="bg-[#0a0a0a]/50 backdrop-blur-3xl border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative group">
+            <div className="bg-[#0a0a0a]/50 backdrop-blur-md border border-white/5 p-8 md:p-10 rounded-[2rem] shadow-2xl relative group will-change-transform">
               {/* Form border glow hover effect */}
               <div className="absolute inset-0 rounded-[2rem] border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-700 pointer-events-none"></div>
 
