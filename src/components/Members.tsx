@@ -130,11 +130,23 @@ export default function Members() {
       .then((data) => setMembers(data));
 
     setBgParticles([...Array(12)].map(() => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
+      left: `${(Math.random() * 80) + 10}%`, // Keep particles away from extreme edges
+      top: `${(Math.random() * 80) + 10}%`,
       duration: 15 + Math.random() * 10,
     })));
   }, []);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedMember) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedMember]);
 
   return (
     <section id="member" className="py-32 bg-[#050505] text-white relative">
@@ -212,7 +224,7 @@ export default function Members() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-x-hidden overflow-y-auto bg-black/40 backdrop-blur-sm"
           >
             {/* BACKDROP */}
             <motion.div
@@ -220,19 +232,21 @@ export default function Members() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="fixed inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
+              className="fixed inset-0 bg-black/90 backdrop-blur-md cursor-pointer overflow-hidden"
             >
-              {bgParticles.map((particle, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute pointer-events-none opacity-5 md:opacity-10"
-                  style={{ left: particle.left, top: particle.top }}
-                  animate={{ y: [0, -60, 0], rotate: [0, 90, 180] }}
-                  transition={{ duration: particle.duration, repeat: Infinity }}
-                >
-                  <div className="w-12 h-20 md:w-16 md:h-24 border border-white/10 rounded-md bg-zinc-900 shadow-2xl"></div>
-                </motion.div>
-              ))}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {bgParticles.map((particle, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute opacity-5 md:opacity-10"
+                    style={{ left: particle.left, top: particle.top }}
+                    animate={{ y: [0, -60, 0], rotate: [0, 90, 180] }}
+                    transition={{ duration: particle.duration, repeat: Infinity }}
+                  >
+                    <div className="w-12 h-20 md:w-16 md:h-24 border border-white/10 rounded-md bg-zinc-900 shadow-2xl"></div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
             {/* CONTENT WRAPPER */}
