@@ -309,7 +309,7 @@ export default function Members() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25 }}
-              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#cbb89d] shadow-[0_30px_60px_rgba(0,0,0,1)] rounded-sm border-l-[30px] border-[#a68d6d] p-6 sm:p-12 font-mono text-[#2c1810]"
+              className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto overflow-x-hidden bg-[#cbb89d] shadow-[0_30px_60px_rgba(0,0,0,1)] rounded-sm border-l-[20px] sm:border-l-[40px] border-[#a68d6d] p-6 sm:p-12 font-mono text-[#2c1810] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* DOSSIER TEXTURE */}
