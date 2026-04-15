@@ -158,6 +158,73 @@ const Stamp = ({
   </div>
 );
 
+const InvestigationStrings = () => (
+  <svg
+    className="absolute inset-0 w-full h-full z-0 opacity-30 pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line
+      x1="10%"
+      y1="20%"
+      x2="40%"
+      y2="50%"
+      stroke="#dc2626"
+      strokeWidth="2"
+      strokeDasharray="5,3"
+    />
+    <line
+      x1="85%"
+      y1="15%"
+      x2="60%"
+      y2="45%"
+      stroke="#dc2626"
+      strokeWidth="2"
+    />
+    <line
+      x1="15%"
+      y1="80%"
+      x2="45%"
+      y2="60%"
+      stroke="#dc2626"
+      strokeWidth="2.5"
+    />
+    <line
+      x1="90%"
+      y1="85%"
+      x2="70%"
+      y2="55%"
+      stroke="#dc2626"
+      strokeWidth="1.5"
+      strokeDasharray="10,5"
+    />
+    <line
+      x1="50%"
+      y1="10%"
+      x2="50%"
+      y2="30%"
+      stroke="#dc2626"
+      strokeWidth="1.5"
+    />
+  </svg>
+);
+
+const CrimeSceneMarker = ({
+  top,
+  left,
+  label,
+}: {
+  top: string;
+  left: string;
+  label: string;
+}) => (
+  <div className="absolute z-5 pointer-events-none group" style={{ top, left }}>
+    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.8)] border border-red-900 animate-pulse" />
+    <div className="absolute top-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/70 px-2 py-0.5 border border-red-600/30 text-[8px] sm:text-[9px] font-mono text-white/60 uppercase">
+      {label}
+    </div>
+  </div>
+);
+
 export default function Members() {
   const [members, setMembers] = useState<DiscordUser[]>([]);
   const [selectedMember, setSelectedMember] = useState<DiscordUser | null>(
@@ -204,6 +271,28 @@ export default function Members() {
       <div className="absolute inset-0 border-[20px] sm:border-[40px] border-[#3e2723] shadow-inner pointer-events-none z-10" />
       <div className="absolute inset-0 border-[2px] border-black/50 pointer-events-none z-10" />
 
+      {/* INVESTIGATION DECORATIONS */}
+      <div className="absolute inset-0 z-5 pointer-events-none">
+        <InvestigationStrings />
+        <CrimeSceneMarker
+          top="15%"
+          left="15%"
+          label="REF: 34.0522° N, 118.2437° W"
+        />
+        <CrimeSceneMarker
+          top="45%"
+          left="82%"
+          label="REF: 33.9416° N, 118.4085° W"
+        />
+        <CrimeSceneMarker
+          top="78%"
+          left="22%"
+          label="REF: 34.0195° N, 118.4912° W"
+        />
+        <CrimeSceneMarker top="12%" left="62%" label="SECTOR 09" />
+        <CrimeSceneMarker top="88%" left="58%" label="CONFIDENTIAL SITE B" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 relative z-20">
         <FadeIn>
           <div className="text-center mb-16 relative">
@@ -222,7 +311,7 @@ export default function Members() {
           </div>
         </FadeIn>
 
-        {/* BACKGROUND DECORATIONS */}
+        {/* BACKGROUND BLUEPRINT */}
         <div className="absolute top-20 left-10 w-64 h-80 bg-blue-900/10 -rotate-12 border border-blue-500/20 pointer-events-none backdrop-blur-[1px] hidden lg:block">
           <div
             className="absolute inset-0 opacity-20"
