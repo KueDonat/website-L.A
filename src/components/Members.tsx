@@ -160,51 +160,16 @@ const Stamp = ({
 
 const InvestigationStrings = () => (
   <svg
-    className="absolute inset-0 w-full h-full z-0 opacity-30 pointer-events-none"
+    className="absolute inset-0 w-full h-full z-0 opacity-25 pointer-events-none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <line
-      x1="10%"
-      y1="20%"
-      x2="40%"
-      y2="50%"
-      stroke="#dc2626"
-      strokeWidth="2"
-      strokeDasharray="5,3"
-    />
-    <line
-      x1="85%"
-      y1="15%"
-      x2="60%"
-      y2="45%"
-      stroke="#dc2626"
-      strokeWidth="2"
-    />
-    <line
-      x1="15%"
-      y1="80%"
-      x2="45%"
-      y2="60%"
-      stroke="#dc2626"
-      strokeWidth="2.5"
-    />
-    <line
-      x1="90%"
-      y1="85%"
-      x2="70%"
-      y2="55%"
-      stroke="#dc2626"
-      strokeWidth="1.5"
-      strokeDasharray="10,5"
-    />
-    <line
-      x1="50%"
-      y1="10%"
-      x2="50%"
-      y2="30%"
-      stroke="#dc2626"
-      strokeWidth="1.5"
-    />
+    {/* More organic "web" of investigation lines */}
+    <line x1="5%" y1="15%" x2="35%" y2="45%" stroke="#991b1b" strokeWidth="1.5" strokeDasharray="4,2" />
+    <line x1="82%" y1="20%" x2="65%" y2="55%" stroke="#991b1b" strokeWidth="1.5" />
+    <line x1="12%" y1="75%" x2="42%" y2="58%" stroke="#991b1b" strokeWidth="2" />
+    <line x1="88%" y1="80%" x2="68%" y2="52%" stroke="#991b1b" strokeWidth="1.2" strokeDasharray="8,4" />
+    <line x1="25%" y1="10%" x2="10%" y2="30%" stroke="#991b1b" strokeWidth="1" />
+    <line x1="75%" y1="85%" x2="95%" y2="65%" stroke="#991b1b" strokeWidth="1" />
   </svg>
 );
 
@@ -271,37 +236,37 @@ export default function Members() {
       <div className="absolute inset-0 border-[20px] sm:border-[40px] border-[#3e2723] shadow-inner pointer-events-none z-10" />
       <div className="absolute inset-0 border-[2px] border-black/50 pointer-events-none z-10" />
 
-      {/* INVESTIGATION DECORATIONS */}
-      <div className="absolute inset-0 z-5 pointer-events-none">
-        <InvestigationStrings />
-        <CrimeSceneMarker
-          top="15%"
-          left="15%"
-          label="REF: 34.0522° N, 118.2437° W"
-        />
-        <CrimeSceneMarker
-          top="45%"
-          left="82%"
-          label="REF: 33.9416° N, 118.4085° W"
-        />
-        <CrimeSceneMarker
-          top="78%"
-          left="22%"
-          label="REF: 34.0195° N, 118.4912° W"
-        />
-        <CrimeSceneMarker top="12%" left="62%" label="SECTOR 09" />
-        <CrimeSceneMarker top="88%" left="58%" label="CONFIDENTIAL SITE B" />
-      </div>
+        {/* INVESTIGATION DECORATIONS */}
+        <div className="absolute inset-0 z-5 pointer-events-none">
+          <InvestigationStrings />
+          <CrimeSceneMarker
+            top="18%"
+            left="8%"
+            label="REF: 34.0522° N, 118.2437° W"
+          />
+          <CrimeSceneMarker
+            top="52%"
+            left="88%"
+            label="REF: 33.9416° N, 118.4085° W"
+          />
+          <CrimeSceneMarker
+            top="82%"
+            left="12%"
+            label="REF: 34.0195° N, 118.4912° W"
+          />
+          <CrimeSceneMarker top="15%" left="75%" label="SECTOR 09" />
+          <CrimeSceneMarker top="92%" left="65%" label="CONFIDENTIAL SITE B" />
+        </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-20">
         <FadeIn>
-          <div className="text-center mb-16 relative">
+          <div className="text-center mb-16 relative flex justify-center">
             {/* CREW TAPE */}
-            <div className="relative inline-block px-12 py-3 bg-[#fdfaf0] shadow-md transform rotate-1 mb-8">
-              <div className="absolute -left-2 -top-2 w-8 h-8 flex items-center justify-center p-1">
+            <div className="relative inline-block px-12 py-3 bg-[#fdfaf0] shadow-md transform rotate-1 mb-8 border border-black/5">
+              <div className="absolute top-1 left-2 w-5 h-5 flex items-center justify-center">
                 <Pin />
               </div>
-              <div className="absolute -right-2 -bottom-2 w-8 h-8 flex items-center justify-center p-1">
+              <div className="absolute bottom-1 right-2 w-5 h-5 flex items-center justify-center">
                 <Pin />
               </div>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-[#2c1810] font-sans">
