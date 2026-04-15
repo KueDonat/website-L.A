@@ -7,6 +7,7 @@ import {
   FaTiktok,
   FaTimes,
   FaSpotify,
+  FaFingerprint,
 } from "react-icons/fa";
 import { IconType } from "react-icons";
 import FadeIn from "./FadeIn";
@@ -44,7 +45,7 @@ export const MEMBER_DETAILS: Record<
   },
   "999264557916762224": {
     banner: "https://wsrv.nl/?url=i.pinimg.com/736x/cc/c2/ad/ccc2ad580d01ec22d2b374fb283ed0a9.jpg",
-    quote: '"Dios siempre está conmigo No siempre culpes a Dios y al destino, sino intenta evaluarte a ti mismo."',
+    quote: '"Dios siempre está conmigo No siempre culpes a Dios dan al destino, sino intenta evaluarte a ti mismo."',
     roles: ["Manager L.A", "Event Organizer", "Host"],
     socials: [
       {
@@ -119,25 +120,36 @@ interface DiscordUser {
   avatar: string;
 }
 
+const Pin = ({ color = "#dc2626" }: { color?: string }) => (
+  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]">
+    <div className="w-5 h-5 rounded-full bg-radial from-red-400 via-red-600 to-red-950 border border-black/20" style={{ backgroundColor: color }} />
+    <div className="w-1 h-3 bg-zinc-300 mx-auto -mt-1 rounded-full shadow-inner" />
+  </div>
+);
+
+const Stamp = ({ text, color = "#991b1b", vertical = false }: { text: string; color?: string; vertical?: boolean }) => (
+  <div 
+    className={`border-4 sm:border-8 border-double px-4 py-1 sm:px-6 sm:py-2 rounded-lg font-black uppercase tracking-[0.2em] transform -rotate-12 opacity-80 mix-blend-multiply flex items-center justify-center whitespace-nowrap ${vertical ? "vertical-rl rotate-180" : ""}`}
+    style={{ borderColor: color, color: color }}
+  >
+    <span className={vertical ? "text-5xl sm:text-7xl" : "text-3xl sm:text-5xl"}>{text}</span>
+  </div>
+);
+
 export default function Members() {
   const [members, setMembers] = useState<DiscordUser[]>([]);
   const [selectedMember, setSelectedMember] = useState<DiscordUser | null>(null);
-  const [bgParticles, setBgParticles] = useState<{left: string, top: string, duration: number}[]>([]);
+  const [rotations, setRotations] = useState<number[]>([]);
 
   useEffect(() => {
     fetch("/api/members")
       .then((res) => res.json())
-      .then((data) => setMembers(data));
-
-    // Optimized: Fewer particles for better performance
-    setBgParticles([...Array(6)].map(() => ({
-      left: `${(Math.random() * 80) + 10}%`,
-      top: `${(Math.random() * 80) + 10}%`,
-      duration: 20 + Math.random() * 15, // Slower duration
-    })));
+      .then((data) => {
+        setMembers(data);
+        setRotations(data.map(() => (Math.random() - 0.5) * 12));
+      });
   }, []);
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedMember) {
       document.body.style.overflow = "hidden";
@@ -150,227 +162,228 @@ export default function Members() {
   }, [selectedMember]);
 
   return (
-    <section id="member" className="py-32 bg-[#050505] text-white relative">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section id="member" className="py-24 bg-[#1a1110] relative overflow-hidden">
+      {/* CORKBOARD TEXTURE */}
+      <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply" 
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070&auto=format&fit=crop')`,
+          backgroundSize: 'cover'
+        }} 
+      />
+      <div className="absolute inset-0 z-1 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cork-board.png')]" />
+
+      {/* WOODEN FRAME */}
+      <div className="absolute inset-0 border-[20px] sm:border-[40px] border-[#3e2723] shadow-inner pointer-events-none z-10" />
+      <div className="absolute inset-0 border-[2px] border-black/50 pointer-events-none z-10" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-20">
         <FadeIn>
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic text-white text-center">
-              Our Core Team
-            </h2>
-            <div className="h-1 w-20 bg-gold-500 mx-auto mt-4 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+          <div className="text-center mb-16 relative">
+             {/* CREW TAPE */}
+             <div className="relative inline-block px-12 py-3 bg-[#fdfaf0] shadow-md transform rotate-1 mb-8">
+                <div className="absolute -left-2 -top-2 w-8 h-8 flex items-center justify-center p-1"><Pin /></div>
+                <div className="absolute -right-2 -bottom-2 w-8 h-8 flex items-center justify-center p-1"><Pin /></div>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-[#2c1810] font-sans">
+                  CREW
+                </h2>
+             </div>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* BACKGROUND DECORATIONS */}
+        <div className="absolute top-20 left-10 w-64 h-80 bg-blue-900/10 -rotate-12 border border-blue-500/20 pointer-events-none backdrop-blur-[1px] hidden lg:block">
+           <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 0v40M0 20h40' fill='none' stroke='%23fff' stroke-width='.5'/%3E%3C/svg%3E")` }} />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 items-center justify-center py-20">
           {members.map((user, index) => (
             <FadeIn key={`${user.id}-${index}`}>
-              <div
+              <motion.div
                 onClick={() => setSelectedMember(user)}
-                className="group relative bg-linear-to-b from-zinc-900/50 to-[#0a0a0a] border border-white/10 hover:border-gold-500/50 rounded-[2rem] cursor-pointer hover:shadow-[0_15px_50px_rgba(212,175,55,0.15)] transition-all duration-500 overflow-hidden will-change-transform"
+                whileHover={{ rotate: 0, scale: 1.05, zIndex: 50, transition: { duration: 0.3 } }}
+                style={{ rotate: rotations[index] || 0 }}
+                className="relative cursor-pointer group will-change-transform"
               >
-                {/* BANNER */}
-                <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src={MEMBER_DETAILS[user.id]?.banner || "https://images.unsplash.com/photo-1614850523296-d8c1af93d400"}
-                    alt="Banner"
-                    fill
-                    className="w-full h-full object-cover brightness-90 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-[#0a0a0a] translate-y-1"></div>
-                </div>
-
-                <div className="pt-16 pb-8 px-6 flex flex-col items-center relative z-10">
-                  <div className="relative w-28 h-28 mb-5 rounded-full border-4 border-[#0a0a0a] shadow-[0_0_20px_rgba(0,0,0,0.8)] group-hover:-translate-y-2 transition-transform duration-500">
-                    <div className="absolute inset-0 rounded-full border border-gold-500/40 group-hover:border-gold-500 transition-all duration-700 overflow-hidden">
-                      <Image
-                        src={user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/0.png`}
-                        alt={user.username}
-                        fill
-                        sizes="112px"
-                        className="rounded-full object-cover p-1"
-                      />
-                    </div>
+                <Pin />
+                
+                {/* POLAROID FRAME */}
+                <div className="bg-[#fdfaf0] p-4 pb-12 shadow-[5px_10px_20px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,0,0,0.05)] border border-[#d4cfc3]">
+                  {/* PHOTO AREA */}
+                  <div className="relative aspect-square w-full bg-zinc-800 overflow-hidden shadow-inner border border-black/10">
+                    <Image
+                      src={user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=512` : `https://cdn.discordapp.com/embed/avatars/0.png`}
+                      alt={user.username}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 300px"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 grayscale-[0.2] group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent opacity-60" />
                   </div>
 
-                  <h3 className="text-2xl font-black text-white italic drop-shadow-md group-hover:text-gold-500 transition-colors duration-300 text-center uppercase tracking-tight">
-                    {user.global_name || user.username}
-                  </h3>
-
-                  <div className="flex flex-col items-center gap-1.5 mt-1.5 mb-6">
-                    <p className="text-gray-400 text-xs font-medium lowercase">@{user.username}</p>
-                    <span className="px-3 py-1 mt-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold text-gray-300 tracking-widest uppercase group-hover:border-gold-500/30 transition-colors">
-                      {MEMBER_DETAILS[user.id]?.roles?.[0] || "Core Team"}
-                    </span>
-                  </div>
-
-                  <div className="w-full flex justify-center">
-                    <div className="flex items-center gap-2 px-6 py-2.5 rounded-xl border border-gold-500/30 bg-linear-to-r from-gold-500/5 to-transparent text-gold-500 text-[10px] tracking-[0.2em] uppercase font-black opacity-80 group-hover:opacity-100 group-hover:bg-gold-500/10 group-hover:border-gold-500/60 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-500">
-                      <span>View Profile</span>
-                      <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
+                  {/* CAPTION */}
+                  <div className="mt-4 text-center">
+                    <h3 className="text-xl md:text-2xl font-black text-[#2c1810] uppercase tracking-tighter line-clamp-1 italic font-sans">
+                      {user.global_name || user.username}
+                    </h3>
+                    <p className="text-zinc-500 text-[10px] font-mono mt-1">REF: {user.id.slice(-6)}</p>
                   </div>
                 </div>
-              </div>
+
+                {/* POST-IT DECORATION */}
+                {index % 3 === 0 && (
+                  <div className="absolute -right-8 -bottom-10 w-24 h-24 bg-yellow-200 shadow-md rotate-12 p-3 text-[10px] text-zinc-700 font-mono hidden sm:block">
+                    <p>NOTE: {MEMBER_DETAILS[user.id]?.roles?.[0] || "REDACTED"}</p>
+                    <div className="absolute top-0 right-0 w-4 h-4 bg-yellow-300 shadow-inner" />
+                  </div>
+                )}
+              </motion.div>
             </FadeIn>
           ))}
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
+      {/* DOSSIER MODAL */}
+      <AnimatePresence>
         {selectedMember && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-2 sm:p-6 overflow-x-hidden overflow-y-auto bg-black/40 backdrop-blur-xs"
-          >
-            {/* BACKDROP */}
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="fixed inset-0 bg-black/90 cursor-pointer overflow-hidden"
-            >
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {bgParticles.map((particle, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute opacity-5"
-                    style={{ left: particle.left, top: particle.top }}
-                    animate={{ y: [0, -40, 0] }} // Simplified: No rotation
-                    transition={{ duration: particle.duration, repeat: Infinity, ease: "linear" }}
-                  >
-                    <div className="w-12 h-20 md:w-16 md:h-24 border border-white/5 rounded-md bg-zinc-900 shadow-xl"></div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* CONTENT WRAPPER */}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            
             <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 30, stiffness: 200 }}
-              className="relative w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 z-10 pointer-events-none py-10"
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#cbb89d] shadow-[0_30px_60px_rgba(0,0,0,1)] rounded-sm border-l-[30px] border-[#a68d6d] p-6 sm:p-12 font-mono text-[#2c1810]"
+              onClick={(e) => e.stopPropagation()}
             >
-              {/* THE CARD */}
-              <div className="relative group perspective-[1200px] pointer-events-auto shrink-0 mb-4 md:mb-0 will-change-transform" onClick={(e) => e.stopPropagation()}>
-                <motion.div
-                  animate={{
-                    rotateY: [-1.5, 1.5, -1.5], // Subtler tilt
-                    rotateX: [0.5, -0.5, 0.5],
-                    y: [0, -8, 0] // Subtler float
-                  }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-[240px] h-[340px] sm:w-[320px] sm:h-[460px] rounded-[1.8rem] bg-[#fdfaf0] shadow-[0_40px_80px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(188,174,131,0.15)] p-4 sm:p-5 flex flex-col border border-[#d4af37]/10"
-                >
-                  <div className="absolute inset-0 opacity-[0.05] pointer-events-none rounded-[1.8rem] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
-                  <div className="absolute inset-3 sm:inset-4 border border-[#900000]/20 rounded-[1.5rem] pointer-events-none"></div>
-                  <div className="absolute inset-4 sm:inset-5 border-[2px] border-[#1a1110] rounded-[1.2rem] pointer-events-none"></div>
+              {/* DOSSIER TEXTURE */}
+              <div className="absolute inset-0 opacity-[0.15] mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
+              
+              <button 
+                onClick={() => setSelectedMember(null)}
+                className="absolute top-6 right-6 p-2 hover:bg-black/10 rounded-full transition-colors z-50 text-[#2c1810]/50 hover:text-[#2c1810]"
+              >
+                <FaTimes size={24} />
+              </button>
 
-                  {/* RANK TOP LEFT */}
-                  <div className="absolute top-6 left-6 sm:top-8 sm:left-8 flex flex-col items-center text-[#900000] z-20 scale-90 sm:scale-100">
-                    <span className="text-2xl sm:text-3xl font-black font-serif leading-none uppercase">
-                      {(() => {
-                        const roles = MEMBER_DETAILS[selectedMember.id]?.roles || [];
-                        if (roles.some(r => r.includes("Leader"))) return "A";
-                        if (roles.some(r => r.includes("CO Leader"))) return "K";
-                        if (roles.some(r => r.includes("Manager"))) return "Q";
-                        return "J";
-                      })()}
-                    </span>
-                    <span className="text-xl sm:text-2xl mt-0.5">♦</span>
-                  </div>
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+                {/* LEFT SIDE: PHOTO & STAMPS */}
+                <div className="flex flex-col gap-8">
+                  <div className="relative inline-block mx-auto md:mx-0">
+                    {/* FINGERPRINT SCRAP */}
+                    <motion.div 
+                      initial={{ rotate: -10, x: -20, y: -20, opacity: 0 }}
+                      animate={{ rotate: -5, x: 0, y: 0, opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="absolute -top-12 -left-12 w-32 h-32 bg-[#f5f5f5] shadow-md border border-zinc-200 p-4 z-20 flex flex-col items-center justify-center rotate-[-5deg]"
+                    >
+                      <FaFingerprint size={48} className="text-zinc-800 opacity-80" />
+                      <div className="absolute top-2 right-2 w-6 h-1 bg-zinc-400 rotate-45 shadow-sm" />
+                      <p className="text-[8px] mt-2 font-black uppercase text-zinc-500">ID VERIFIED</p>
+                    </motion.div>
 
-                  {/* RANK BOTTOM RIGHT */}
-                  <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 flex flex-col items-center text-[#900000] rotate-180 z-20 scale-90 sm:scale-100">
-                    <span className="text-2xl sm:text-3xl font-black font-serif leading-none uppercase">
-                      {(() => {
-                        const roles = MEMBER_DETAILS[selectedMember.id]?.roles || [];
-                        if (roles.some(r => r.includes("Leader"))) return "A";
-                        if (roles.some(r => r.includes("CO Leader"))) return "K";
-                        if (roles.some(r => r.includes("Manager"))) return "Q";
-                        return "J";
-                      })()}
-                    </span>
-                    <span className="text-xl sm:text-2xl mt-0.5">♦</span>
-                  </div>
-
-                  <div className="absolute top-[3.5rem] bottom-[3.5rem] sm:top-[4.5rem] sm:bottom-[4.5rem] left-8 sm:left-10 right-8 sm:right-10 border-[3px] border-[#1a1110] overflow-hidden bg-[#050505]">
-                    <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='%23600'/%3E%3C/svg%3E")`, backgroundSize: "30px 30px" }}></div>
-                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent z-10"></div>
-                    <div className="absolute inset-0 flex items-end justify-center pt-6">
-                      <div className="relative w-full h-[120%] -mb-4">
+                    {/* PHOTO */}
+                    <div className="bg-[#f0f0f0] p-4 pb-16 shadow-xl border border-zinc-300 transform rotate-2 max-w-[300px]">
+                      <div className="relative aspect-square w-full bg-zinc-900 border border-black/10">
                         <Image
                           src={selectedMember.avatar ? `https://cdn.discordapp.com/avatars/${selectedMember.id}/${selectedMember.avatar}.png?size=512` : `https://cdn.discordapp.com/embed/avatars/0.png`}
-                          alt="Avatar" fill className="object-cover object-top drop-shadow-[0_20px_40px_rgba(0,0,0,1)] grayscale-[0.1]" sizes="300px" unoptimized
+                          alt="Subject" fill className="object-cover grayscale-[0.3]" unoptimized
                         />
                       </div>
+                      <div className="mt-4 border-b border-zinc-400 pb-1">
+                        <p className="text-lg font-black tracking-tight">{selectedMember.global_name || selectedMember.username}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-12 space-y-8 flex flex-col items-center md:items-start overflow-hidden">
+                       <Stamp text="TOP SECRET" />
+                       <Stamp text="CONFIDENTIAL" color="#1e3a8a" />
                     </div>
                   </div>
-                  <motion.div animate={{ x: ["-150%", "150%"] }} transition={{ duration: 12, repeat: Infinity, repeatDelay: 5 }} className="absolute inset-0 w-1/3 bg-white/5 -skew-x-12 blur-2xl pointer-events-none" />
-                </motion.div>
+                </div>
+
+                {/* RIGHT SIDE: DATA */}
+                <div className="flex flex-col gap-8 uppercase">
+                  <div className="relative border-2 border-[#2c1810]/20 p-6 pt-10">
+                    <div className="absolute -top-6 left-6 bg-[#cbb89d] px-4 py-1 text-2xl font-black border-2 border-[#2c1810]/20">
+                      CLASSIFIED
+                    </div>
+                    
+                    <div className="space-y-6 text-sm sm:text-base">
+                       <div>
+                          <p className="text-[#2c1810]/40 font-bold mb-1 underline">OPERATION:</p>
+                          <p className="font-black text-2xl tracking-tighter">LOS ANGELES CORE TEAM</p>
+                       </div>
+
+                       <div>
+                          <p className="text-[#2c1810]/40 font-bold mb-1 underline">SUBJECT NAME:</p>
+                          <p className="font-black text-xl">{selectedMember.global_name || selectedMember.username} (aka @{selectedMember.username})</p>
+                       </div>
+
+                       <div>
+                          <p className="text-[#2c1810]/40 font-bold mb-1 underline">DESIGNATION:</p>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                             {(MEMBER_DETAILS[selectedMember.id]?.roles || ["OPERATIVE"]).map((role, i) => (
+                               <span key={i} className="px-3 py-1 bg-black/80 text-[#cbb89d] font-black text-xs">
+                                 {role}
+                               </span>
+                             ))}
+                          </div>
+                       </div>
+
+                       <div>
+                          <p className="text-[#2c1810]/40 font-bold mb-1 underline">MOTTO/QUOTE:</p>
+                          <p className="italic font-bold leading-relaxed border-l-4 border-black/20 pl-4 py-2 bg-black/5">
+                            {MEMBER_DETAILS[selectedMember.id]?.quote || "MISSION DATA MISSING / REDACTED"}
+                          </p>
+                       </div>
+
+                       <div className="pt-8 flex flex-col gap-4">
+                          <p className="text-[#2c1810]/40 font-bold underline">SOCIAL CHANNELS:</p>
+                          <div className="flex flex-wrap gap-4">
+                            {(MEMBER_DETAILS[selectedMember.id]?.socials || []).map((social, i) => (
+                              <a 
+                                key={i} 
+                                href={social.url} 
+                                target="_blank" 
+                                className="flex items-center gap-2 group border border-black/20 px-4 py-2 hover:bg-black hover:text-[#cbb89d] transition-all"
+                              >
+                                <social.icon />
+                                <span className="font-black text-xs">{social.platform}</span>
+                              </a>
+                            ))}
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+
+                  {/* BOTTOM DECORATION */}
+                  <div className="mt-auto opacity-50 flex items-end justify-between border-t border-black/20 pt-4">
+                     <div className="text-[10px] space-y-1">
+                        <p>FILE ID: {selectedMember.id}</p>
+                        <p>STATUS: ACTIVE / FIELD OPERATIVE</p>
+                        <p>LAST UPDATED: 2026-04-15</p>
+                     </div>
+                  </div>
+                </div>
               </div>
 
-              {/* INFORMATION SIDE */}
-              <div className="flex flex-col text-center md:text-left pointer-events-auto z-20 max-w-xl w-full px-4">
-                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-                  <div className="mb-6 md:mb-8">
-                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-black text-transparent bg-clip-text bg-linear-to-b from-white via-[#f0e6d2] to-[#bcae83] uppercase leading-tight drop-shadow-2xl">
-                      {selectedMember.global_name || selectedMember.username}
-                    </h2>
-                    <p className="text-[#900000] font-sans font-bold tracking-[0.3em] uppercase text-xs sm:text-sm mt-1 flex items-center justify-center md:justify-start gap-2">
-                      <span className="w-8 h-px bg-[#900000]/40"></span>
-                      @{selectedMember.username}
-                    </p>
-                  </div>
-
-                  <div className="mb-8 md:mb-10">
-                    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                      {(MEMBER_DETAILS[selectedMember.id]?.roles || ["Member"]).map((role, i) => (
-                        <span key={i} className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] shadow-lg border backdrop-blur-md transition-all ${i === 0 ? "bg-[#900000]/20 border-[#900000]/40 text-[#fdfaf0] scale-105 sm:scale-110 mr-1 sm:mr-2" : "bg-white/5 border-white/10 text-gray-400"}`}>
-                          {role}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mb-8 md:mb-10 relative group">
-                    <div className="p-4 sm:p-6 bg-[#0a0a0a]/60 border-l-[3px] border-[#d4af37] rounded-r-2xl shadow-xl backdrop-blur-sm">
-                      <p className="text-gray-300 italic font-serif text-base sm:text-lg leading-relaxed">
-                        {MEMBER_DETAILS[selectedMember.id]?.quote || "The silent strategist of Los Angeles."}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
-                    {(MEMBER_DETAILS[selectedMember.id]?.socials || []).map((social, i) => (
-                      <a key={i} href={social.url} target="_blank" rel="noreferrer" className="group flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-6 sm:py-3 border border-white/10 rounded-xl bg-white/5 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/40 transition-all font-sans">
-                        <social.icon size={16} className="text-[#d4af37] group-hover:scale-110 transition-transform" />
-                        <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-white/70 group-hover:text-white">
-                          {social.platform}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
+              {/* VERTICAL CLASSIFIED SIDEBAR STAMP EFFECT */}
+              <div className="absolute left-0 top-0 bottom-0 pointer-events-none hidden lg:flex items-center opacity-10">
+                 <div className="transform rotate-180 font-black text-9xl tracking-[0.5em] text-black mix-blend-multiply vertical-rl">
+                   CLASSIFIED
+                 </div>
               </div>
-
-              {/* CLOSE BUTTON */}
-              <button onClick={() => setSelectedMember(null)} className="fixed top-4 right-4 sm:top-6 sm:right-6 lg:top-10 lg:right-10 text-white/30 hover:text-white bg-black/40 sm:bg-white/5 hover:bg-white/10 p-3 sm:p-4 rounded-full border border-white/10 hover:border-white/30 transition-all z-[10000] group shadow-2xl pointer-events-auto">
-                <FaTimes size={18} className="group-hover:rotate-90 transition-transform duration-300" />
-              </button>
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
-
-
     </section>
   );
 }
