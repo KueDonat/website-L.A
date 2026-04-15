@@ -137,6 +137,16 @@ const Pin = ({ color = "#dc2626" }: { color?: string }) => (
   </div>
 );
 
+const AdhesiveTape = ({ className = "" }: { className?: string }) => (
+  <div 
+    className={`absolute w-12 h-6 bg-white/20 backdrop-blur-[2px] border border-white/10 shadow-sm mix-blend-overlay rotate-45 ${className}`}
+    style={{ 
+      backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%)',
+      maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' 
+    }}
+  />
+);
+
 const Stamp = ({
   text,
   color = "#991b1b",
@@ -261,14 +271,12 @@ export default function Members() {
       <div className="max-w-7xl mx-auto px-6 relative z-20">
         <FadeIn>
           <div className="text-center mb-16 relative flex justify-center">
-            {/* CREW TAPE */}
+            {/* CREW TAPE (The strip itself) */}
             <div className="relative inline-block px-12 py-3 bg-[#fdfaf0] shadow-md transform rotate-1 mb-8 border border-black/5">
-              <div className="absolute top-1 left-2 w-5 h-5 flex items-center justify-center">
-                <Pin />
-              </div>
-              <div className="absolute bottom-1 right-2 w-5 h-5 flex items-center justify-center">
-                <Pin />
-              </div>
+              {/* ADHESIVE TAPE (The solatip) */}
+              <AdhesiveTape className="-top-3 -left-4 rotate-[-35deg] w-16 h-8 opacity-80" />
+              <AdhesiveTape className="-bottom-3 -right-4 rotate-[-35deg] w-16 h-8 opacity-80" />
+              
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-[#2c1810] font-sans">
                 CREW
               </h2>
