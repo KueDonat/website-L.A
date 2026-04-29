@@ -500,19 +500,31 @@ export default function Members() {
                         <div className="flex flex-wrap gap-4">
                           {(
                             MEMBER_DETAILS[selectedMember.id]?.socials || []
-                          ).map((social, i) => (
-                            <a
-                              key={i}
-                              href={social.url}
-                              target="_blank"
-                              className="flex items-center gap-2 group border border-black/20 px-4 py-2 hover:bg-black hover:text-[#cbb89d] transition-all"
-                            >
-                              <social.icon />
-                              <span className="font-black text-xs">
-                                {social.platform}
-                              </span>
-                            </a>
-                          ))}
+                          ).map((social, i) => {
+                            const isPlaceholder = social.url === "#" || !social.url;
+                            return (
+                              <a
+                                key={i}
+                                href={isPlaceholder ? undefined : social.url}
+                                target={isPlaceholder ? undefined : "_blank"}
+                                rel={isPlaceholder ? undefined : "noopener noreferrer"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (isPlaceholder) e.preventDefault();
+                                }}
+                                className={`flex items-center gap-2 group border border-black/20 px-4 py-2 transition-all relative z-50 ${
+                                  isPlaceholder
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : "hover:bg-black hover:text-[#cbb89d] cursor-pointer"
+                                }`}
+                              >
+                                <social.icon />
+                                <span className="font-black text-xs">
+                                  {social.platform}
+                                </span>
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
