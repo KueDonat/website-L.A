@@ -100,24 +100,7 @@ export const MEMBER_DETAILS: Record<
       },
     ],
   },
-  "908159981168251012": {
-    banner:
-      "https://wsrv.nl/?url=i.pinimg.com/736x/ff/cc/aa/ffccaa15454b09ebc3a40c3be2786fa0.jpg",
-    quote: '"Im never following my heart ever again, that organ is f dumb."',
-    roles: ["Host", "Talent", "Event Organizer"],
-    socials: [
-      {
-        platform: "Instagram",
-        url: "https://www.instagram.com/byaletaya",
-        icon: FaInstagram,
-      },
-      {
-        platform: "Tiktok",
-        url: "https://www.tiktok.com/@.aeliee",
-        icon: FaTiktok,
-      },
-    ],
-  },
+  
 };
 
 interface DiscordUser {
